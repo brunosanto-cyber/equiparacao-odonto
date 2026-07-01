@@ -20,35 +20,35 @@ def obter_logo_base64(caminho_imagem):
 
 logo_unimed_html = obter_logo_base64("foto.png")
 
-# === DESIGN SYSTEM: BLINDAGEM DE CORES (FIXO PARA MODO CLARO E ESCURO) ===
+# === DESIGN SYSTEM: FUNDO VERDE UNIMED E TEXTO BRANCO ===
 st.markdown(f"""
     <style>
-        /* Fundo geral da página */
+        /* Fundo geral da página (Cinza muito claro para destacar os cards verdes) */
         .stApp {{
-            background-color: #F0F2F6 !important;
+            background-color: #F4F7F6 !important;
         }}
 
-        /* BANNER PRINCIPAL - Cores Unimed Odonto Travadas */
+        /* BANNER PRINCIPAL - Verde Unimed */
         .unimed-banner-blindado {{
-            background: linear-gradient(135deg, #00995D 0%, #004D26 100%) !important;
+            background-color: #00995D !important;
             padding: 30px !important;
             border-radius: 15px !important;
             margin-bottom: 25px !important;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15) !important;
             color: white !important;
         }}
 
-        /* CARDS DE MÉTRICAS - Fundo branco e texto escuro fixos */
+        /* CARDS DE MÉTRICAS - Fundo Verde Unimed e Texto Branco */
         .metric-card-blindado {{
-            background-color: #FFFFFF !important;
+            background-color: #00995D !important;
             padding: 20px !important;
             border-radius: 12px !important;
-            border-bottom: 5px solid #00995D !important;
             text-align: center !important;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
+            color: white !important;
         }}
         .metric-label-blindado {{
-            color: #555555 !important;
+            color: #E0F2F1 !important;
             font-size: 13px !important;
             font-weight: 600 !important;
             text-transform: uppercase !important;
@@ -57,16 +57,19 @@ st.markdown(f"""
             font-size: 28px !important;
             font-weight: 700 !important;
             margin-top: 5px !important;
+            color: white !important;
         }}
 
-        /* CARDS COMPARATIVOS - Blindagem contra modo escuro */
+        /* CARDS COMPARATIVOS - Fundo Verde Unimed */
         .comp-card-blindado {{
-            background-color: #FFFFFF !important;
+            background-color: #00995D !important;
             padding: 25px !important;
-            border-radius: 12px !important;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+            border-radius: 15px !important;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15) !important;
             margin-bottom: 20px !important;
-            min-height: 450px !important;
+            min-height: 480px !important;
+            color: white !important;
+            border: 1px solid #007A4B !important;
         }}
         
         /* Títulos e Textos dentro dos cards */
@@ -77,32 +80,33 @@ st.markdown(f"""
             display: flex !important;
             align-items: center !important;
             gap: 10px !important;
+            color: white !important;
         }}
         
         .coverage-item-blindado {{
             padding: 12px 0 !important;
-            border-bottom: 1px solid #EEEEEE !important;
-            color: #333333 !important; /* Texto escuro sempre visível */
+            border-bottom: 1px solid rgba(255,255,255,0.2) !important;
+            color: white !important;
             font-size: 15px !important;
             display: flex !important;
             justify-content: space-between !important;
             align-items: center !important;
         }}
 
-        /* Badges de SIM/NÃO */
-        .badge-sim-fixo {{ background-color: #E6F4EA !important; color: #137333 !important; padding: 4px 12px !important; border-radius: 20px !important; font-weight: 700 !important; font-size: 12px !important; }}
-        .badge-nao-fixo {{ background-color: #FCE8E6 !important; color: #C5221F !important; padding: 4px 12px !important; border-radius: 20px !important; font-weight: 700 !important; font-size: 12px !important; }}
+        /* Badges customizados para fundo verde */
+        .badge-sim-verde {{ background-color: #FFFFFF !important; color: #00995D !important; padding: 4px 12px !important; border-radius: 20px !important; font-weight: 700 !important; font-size: 12px !important; }}
+        .badge-nao-verde {{ background-color: #FFCDD2 !important; color: #B71C1C !important; padding: 4px 12px !important; border-radius: 20px !important; font-weight: 700 !important; font-size: 12px !important; }}
 
-        /* Títulos de seção fora de cards */
+        /* Títulos de seção */
         .section-header-fixo {{
-            color: #1E293B !important;
+            color: #004D26 !important;
             font-weight: 700 !important;
-            margin: 20px 0 !important;
+            margin: 25px 0 15px 0 !important;
         }}
     </style>
 """, unsafe_allow_html=True)
 
-# === BANCO DE DADOS (DADOS DOS DOCUMENTOS ANEXADOS) ===
+# === BANCO DE DADOS ATUALIZADO (RADAR DE MERCADO) ===
 dados_planos = [
     {"Operadora": "Unimed ODONTO", "Plano": "Essencial", "Contratacao": "PRATELEIRA", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "Unimed ODONTO", "Plano": "Essencial Plus", "Contratacao": "PRATELEIRA", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus"},
@@ -126,10 +130,10 @@ nomes_cobs = {"Rol": "Rol ANS Clínico", "Doc": "Documentação Ortodôntica", "
 st.markdown(f"""
     <div class="unimed-banner-blindado">
         <div style="display: flex; align-items: center; gap: 20px;">
-            <img src="{logo_unimed_html}" style="max-height: 60px; border-radius: 8px;">
+            <img src="{logo_unimed_html}" style="max-height: 65px; border-radius: 5px;">
             <h1 style="margin:0; color: white !important; font-size: 32px; border:none;">Portal Equivalência de Planos - Odonto</h1>
         </div>
-        <p style="margin: 10px 0 0 80px; color: white !important; opacity: 0.9;">Análise de Coberturas e Equiparação Inteligente de Mercado</p>
+        <p style="margin: 10px 0 0 85px; color: white !important; opacity: 0.9;">Dashboard Corporativo de Equiparação de Coberturas</p>
     </div>
 """, unsafe_allow_html=True)
 
@@ -155,50 +159,52 @@ if plano_sel:
         elif linha_cong[c] == "SIM" and linha_uni[c] == "NÃO": diferenciais.append(nomes_cobs[c])
     
     porcentagem = (iguais / 6) * 100
-    cor_perc = "#00995D" if porcentagem == 100 else ("#A2C027" if porcentagem >= 70 else "#E05353")
 
     # Módulo de Indicadores
     st.markdown("<h3 class='section-header-fixo'>📊 Indicadores de Aderência</h3>", unsafe_allow_html=True)
     m_col1, m_col2, m_col3 = st.columns(3)
     
     with m_col1:
-        st.markdown(f'<div class="metric-card-blindado"><div class="metric-label-blindado">Equiparação</div><div class="metric-value-blindado" style="color:{cor_perc} !important;">{porcentagem:.1f}%</div></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="metric-card-blindado"><div class="metric-label-blindado">Equiparação</div><div class="metric-value-blindado">{porcentagem:.1f}%</div></div>', unsafe_allow_html=True)
     with m_col2:
-        st.markdown(f'<div class="metric-card-blindado"><div class="metric-label-blindado">Sugestão Unimed</div><div class="metric-value-blindado" style="color:#004D26 !important;">{equiv_uni}</div></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="metric-card-blindado"><div class="metric-label-blindado">Recomendação</div><div class="metric-value-blindado">{equiv_uni}</div></div>', unsafe_allow_html=True)
     with m_col3:
         status = "Par Perfeito" if porcentagem == 100 else ("Equivalente" if porcentagem >= 70 else "Gap Técnico")
-        st.markdown(f'<div class="metric-card-blindado"><div class="metric-label-blindado">Status Comercial</div><div class="metric-value-blindado" style="color:#2D3748 !important;">{status}</div></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="metric-card-blindado"><div class="metric-label-blindado">Status Comercial</div><div class="metric-value-blindado">{status}</div></div>', unsafe_allow_html=True)
 
-    st.markdown(f'<div style="width:100%; background:#DDD; height:8px; border-radius:4px; margin:20px 0;"><div style="width:{porcentagem}%; background:{cor_perc}; height:100%; border-radius:4px;"></div></div>', unsafe_allow_html=True)
+    # Barra visual de progresso (Fundo branco para destacar no verde)
+    st.markdown(f'<div style="width:100%; background:rgba(0,0,0,0.1); height:10px; border-radius:10px; margin:25px 0;"><div style="width:{porcentagem}%; background:#00995D; height:100%; border-radius:10px; border:2px solid white;"></div></div>', unsafe_allow_html=True)
 
     # Módulo Comparativo Lado a Lado
     c_col1, c_col2 = st.columns(2)
     
     with c_col1:
-        cobs_html = "".join([f'<div class="coverage-item-blindado">{nomes_cobs[c]} <span class="{"badge-sim-fixo" if linha_cong[c]=="SIM" else "badge-nao-fixo"}">{linha_cong[c]}</span></div>' for c in coberturas])
+        cobs_html = "".join([f'<div class="coverage-item-blindado">{nomes_cobs[c]} <span class="{"badge-sim-verde" if linha_cong[c]=="SIM" else "badge-nao-verde"}">{linha_cong[c]}</span></div>' for c in coberturas])
         st.markdown(f"""
-            <div class="comp-card-blindado" style="border-top: 6px solid #718096 !important;">
-                <div class="card-title-text" style="color: #2D3748 !important;">🔍 {op_sel} — {plano_sel}</div>
-                <p style="color: #666 !important; font-size: 14px; margin-bottom: 20px;">Modalidade: {mod_sel}</p>
+            <div class="comp-card-blindado">
+                <div class="card-title-text">🔍 {op_sel} — {plano_sel}</div>
+                <p style="color: #E0F2F1 !important; font-size: 14px; margin-bottom: 20px; opacity:0.9;">Modalidade Selecionada: {mod_sel}</p>
+                <hr style="border:0; border-top:1px solid rgba(255,255,255,0.2); margin-bottom:15px;">
                 {cobs_html}
             </div>
         """, unsafe_allow_html=True)
 
     with c_col2:
-        uni_html = "".join([f'<div class="coverage-item-blindado">{nomes_cobs[c]} <span class="{"badge-sim-fixo" if linha_uni[c]=="SIM" else "badge-nao-fixo"}">{linha_uni[c]}</span></div>' for c in coberturas])
+        uni_html = "".join([f'<div class="coverage-item-blindado">{nomes_cobs[c]} <span class="{"badge-sim-verde" if linha_uni[c]=="SIM" else "badge-nao-verde"}">{linha_uni[c]}</span></div>' for c in coberturas])
         st.markdown(f"""
-            <div class="comp-card-blindado" style="border-top: 6px solid #00995D !important; background-color: #F7FDFB !important;">
-                <div class="card-title-text" style="color: #00995D !important;">🦷 Unimed ODONTO — {equiv_uni}</div>
-                <p style="color: #004D26 !important; font-size: 14px; margin-bottom: 20px;">Par Ideal Mapeado</p>
+            <div class="comp-card-blindado" style="background-color: #007A4B !important;">
+                <div class="card-title-text">🦷 Unimed ODONTO — {equiv_uni}</div>
+                <p style="color: #E0F2F1 !important; font-size: 14px; margin-bottom: 20px; opacity:0.9;">Par Ideal de Prateleira Mapeado</p>
+                <hr style="border:0; border-top:1px solid rgba(255,255,255,0.2); margin-bottom:15px;">
                 {uni_html}
             </div>
         """, unsafe_allow_html=True)
 
-    # Insights
+    # Insights (Card de destaque final)
     st.markdown(f"""
-        <div class="insight-box" style="background-color: white !important; border-left: 6px solid #004D26 !important; padding: 20px !important;">
-            <h4 style="color: #004D26 !important; margin-top:0;">💡 Argumentos de Vendas</h4>
-            <p style="color: #333 !important; margin: 10px 0;"><b>Gap Negativo (Falta no Concorrente):</b><br> <span style="color:#C5221F;">{", ".join(faltas) if faltas else "Plano Concorrente cobre tudo."}</span></p>
-            <p style="color: #333 !important; margin: 10px 0;"><b>Diferencial Concorrente:</b><br> <span style="color:#137333;">{", ".join(diferenciais) if diferenciais else "Nenhum diferencial extra detectado."}</span></p>
+        <div style="background-color: white !important; border-left: 8px solid #00995D !important; padding: 25px !important; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+            <h4 style="color: #004D26 !important; margin-top:0;">💡 Argumentos Comerciais Técnicos</h4>
+            <p style="color: #444 !important; margin: 10px 0; font-size:15px;"><b>Onde a Concorrência perde (Falta no Concorrente):</b><br> <span style="color:#B71C1C; font-weight:700;">{", ".join(faltas) if faltas else "Plano Concorrente cobre todos os itens básicos."}</span></p>
+            <p style="color: #444 !important; margin: 10px 0; font-size:15px;"><b>Diferencial da Concorrência:</b><br> <span style="color:#00796B; font-weight:700;">{", ".join(diferenciais) if diferenciais else "Nenhum extra detectado em relação à prateleira Unimed."}</span></p>
         </div>
     """, unsafe_allow_html=True)
