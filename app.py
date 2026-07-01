@@ -11,11 +11,9 @@ st.set_page_config(
 # === ESTILIZAÇÃO CUSTOMIZADA: IDENTIDADE UNIMED ODONTO ===
 st.markdown("""
     <style>
-        /* Cor de fundo geral */
         .stApp {
             background-color: #fcfdfd;
         }
-        /* Customização do título principal */
         .title-unimed {
             color: #00995D;
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -24,7 +22,6 @@ st.markdown("""
             padding-bottom: 10px;
             margin-bottom: 25px;
         }
-        /* Estilo dos cards */
         .card-concorrente {
             background-color: #ffffff;
             padding: 20px;
@@ -51,49 +48,49 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# === BANCO DE DADOS INTEGRADO (DADOS DO SEU PDF) ===
+# === BANCO DE DADOS INTEGRADO ===
 dados_planos = [
-    # --- UNIMED ODONTO (Linha de Base) ---
-    {"Operadora": "Unimed ODONTO", "Plano": "Essencial", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "Unimed ODONTO", "Plano": "Essencial Plus", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus"},
-    {"Operadora": "Unimed ODONTO", "Plano": "Essencial Plus DOC", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus DOC"},
-    {"Operadora": "Unimed ODONTO", "Plano": "Pleno", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"},
-    {"Operadora": "Unimed ODONTO", "Plano": "Pleno Plus", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno Plus"},
-    {"Operadora": "Unimed ODONTO", "Plano": "Pleno Top", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "NÃO", "Equiv": "Pleno Top"},
+    # --- UNIMED ODONTO (Linha de Base - Ref: Página 1) ---
+    {"Operadora": "Unimed ODONTO", "Plano": "Essencial", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"}, # [cite: 1]
+    {"Operadora": "Unimed ODONTO", "Plano": "Essencial Plus", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus"}, # [cite: 1]
+    {"Operadora": "Unimed ODONTO", "Plano": "Essencial Plus DOC", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus DOC"}, # [cite: 1]
+    {"Operadora": "Unimed ODONTO", "Plano": "Pleno", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"}, # [cite: 1]
+    {"Operadora": "Unimed ODONTO", "Plano": "Pleno Plus", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno Plus"}, # [cite: 1]
+    {"Operadora": "Unimed ODONTO", "Plano": "Pleno Top", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "NÃO", "Equiv": "Pleno Top"}, # [cite: 1]
     
-    # --- SULAMÉRICA ---
-    {"Operadora": "SulAmérica", "Plano": "Mais", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus"},
-    {"Operadora": "SulAmérica", "Plano": "Mais Doc", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus DOC"},
-    {"Operadora": "SulAmérica", "Plano": "Mais Clarear", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "SIM", "Reemb": "NÃO", "Equiv": "Pleno Top"},
-    {"Operadora": "SulAmérica", "Plano": "Mais Orto", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"},
-    {"Operadora": "SulAmérica", "Plano": "Mais Pro", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "SIM", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno Plus"},
-    {"Operadora": "SulAmérica", "Plano": "Premium", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "SIM", "Equiv": "Pleno Top"},
+    # --- SULAMÉRICA (Ref: Página 3) ---
+    {"Operadora": "SulAmérica", "Plano": "Mais", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus"}, # [cite: 5]
+    {"Operadora": "SulAmérica", "Plano": "Mais Doc", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus DOC"}, # [cite: 5]
+    {"Operadora": "SulAmérica", "Plano": "Mais Clarear", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "SIM", "Reemb": "NÃO", "Equiv": "Pleno Top"}, # [cite: 5]
+    {"Operadora": "SulAmérica", "Plano": "Mais Orto", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"}, # [cite: 5]
+    {"Operadora": "SulAmérica", "Plano": "Mais Pro", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "SIM", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno Plus"}, # [cite: 5]
+    {"Operadora": "SulAmérica", "Plano": "Premium", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "SIM", "Equiv": "Pleno Top"}, # [cite: 5]
     
-    # --- AMIL DENTAL ---
-    {"Operadora": "Amil Dental", "Plano": "Dental 205", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "Amil Dental", "Plano": "Prótese Clínica E60", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "SIM", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno Plus"},
-    {"Operadora": "Amil Dental", "Plano": "Prótese Estética E90", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "SIM", "Clar": "SIM", "Reemb": "NÃO", "Equiv": "Pleno Top"},
-    {"Operadora": "Amil Dental", "Plano": "Ortodontia E80", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"},
+    # --- AMIL DENTAL (Ref: Página 3) ---
+    {"Operadora": "Amil Dental", "Plano": "Dental 205", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"}, # [cite: 7]
+    {"Operadora": "Amil Dental", "Plano": "Prótese Clínica E60", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "SIM", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno Plus"}, # [cite: 7]
+    {"Operadora": "Amil Dental", "Plano": "Prótese Estética E90", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "SIM", "Clar": "SIM", "Reemb": "NÃO", "Equiv": "Pleno Top"}, # [cite: 7]
+    {"Operadora": "Amil Dental", "Plano": "Ortodontia E80", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"}, # [cite: 7]
     
-    # --- ODONTOPREV ---
-    {"Operadora": "OdontoPrev", "Plano": "Integral DOC", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus DOC"},
-    {"Operadora": "OdontoPrev", "Plano": "Master", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "NÃO", "Equiv": "Pleno Top"},
+    # --- ODONTOPREV (Ref: Página 1) ---
+    {"Operadora": "OdontoPrev", "Plano": "Integral DOC", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus DOC"}, # [cite: 1]
+    {"Operadora": "OdontoPrev", "Plano": "Master", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "NÃO", "Equiv": "Pleno Top"}, # [cite: 1]
     
-    # --- GRUPO NOTRE DAME INTERMÉDICA (GNDI) ---
-    {"Operadora": "GNDI (Intermédica)", "Plano": "Smart Odonto", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "GNDI (Intermédica)", "Plano": "Top Premium", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus"},
-    {"Operadora": "GNDI (Intermédica)", "Plano": "Top Premium DO", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus DOC"},
+    # --- GRUPO NOTRE DAME INTERMÉDICA - GNDI (Ref: Página 1) ---
+    {"Operadora": "GNDI (Intermédica)", "Plano": "Smart Odonto", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"}, # [cite: 1]
+    {"Operadora": "GNDI (Intermédica)", "Plano": "Top Premium", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus"}, # [cite: 1]
+    {"Operadora": "GNDI (Intermédica)", "Plano": "Top Premium DO", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus DOC"}, # [cite: 1]
     
-    # --- HAPVIDA ---
-    {"Operadora": "Hapvida Odonto", "Plano": "Odonto Premium Nacional", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus"},
+    # --- HAPVIDA (Ref: Página 1) ---
+    {"Operadora": "Hapvida Odonto", "Plano": "Odonto Premium Nacional", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus"}, # [cite: 1]
     
-    # --- DENTALUNI ---
-    {"Operadora": "DentalUni", "Plano": "Dental Essencial", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "DentalUni", "Plano": "Dental Elite", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno Plus"},
+    # --- DENTALUNI (Ref: Página 5) ---
+    {"Operadora": "DentalUni", "Plano": "Dental Essencial", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"}, # [cite: 57]
+    {"Operadora": "DentalUni", "Plano": "Dental Elite", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno Plus"}, # [cite: 57]
     
-    # --- PORTO SEGURO ---
-    {"Operadora": "Porto Seguro", "Plano": "Bronze 10", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "Porto Seguro", "Plano": "Bronze Integral DOC 10", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus DOC"}
+    # --- PORTO SEGURO (Ref: Página 5) ---
+    {"Operadora": "Porto Seguro", "Plano": "Bronze 10", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"}, # [cite: 57]
+    {"Operadora": "Porto Seguro", "Plano": "Bronze Integral DOC 10", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus DOC"} # [cite: 57]
 ]
 
 df_base = pd.DataFrame(dados_planos)
@@ -105,7 +102,7 @@ nomes_coberturas = {
 }
 
 # === INTERFACE DO USUÁRIO ===
-st.markdown("<h1 class='title-unimed'>🛡️ Plataforma União Comercial Unimed Odonto</h1>", unsafe_allow_html=True)
+st.markdown("<h1 class='title-unimed'>🛡️ Plataforma Comercial Unimed Odonto</h1>", unsafe_allow_html=True)
 st.subheader("Ferramenta de Equiparação Técnica e Inteligência de Mercado")
 
 # Área de Seleção (Filtros superiores)
@@ -116,10 +113,11 @@ with col_filtro1:
     op_selecionada = st.selectbox("1. Selecione a Operadora Concorrente:", operadoras_disponiveis)
 
 with col_filtro2:
-    planos_filtrados = df_base[df_base["Operadora"] == op_selecionada["Plano"].tolist()
+    # AQUI FOI CORRIGIDO O COLCHETE QUE CAUSAVA O ERRO:
+    planos_filtrados = df_base[df_base["Operadora"] == op_selecionada]["Plano"].tolist()
     plano_selecionado = st.selectbox("2. Selecione o Plano da Congênere:", planos_filtrados)
 
-# Lógica de cálculo
+# Lógica de cálculo e renderização
 if plano_selecionado:
     linha_cong = df_base[(df_base["Operadora"] == op_selecionada) & (df_base["Plano"] == plano_selecionado)].iloc[0]
     equiv_unimed = linha_cong["Equiv"]
@@ -133,7 +131,7 @@ if plano_selecionado:
             
     porcentagem = (iguais / len(coberturas)) * 100
 
-    # Layout de Resultados em Colunas (Cards Lado a Lado)
+    # Layout de Resultados em Colunas
     st.markdown("---")
     col_card1, col_card2 = st.columns(2)
     
@@ -153,7 +151,7 @@ if plano_selecionado:
             <div class="card-unimed">
                 <h3 style="color: #00995D; margin-top:0;">💡 Recomendação Comercial</h3>
                 <h2 style="margin: 5px 0 15px 0; color:#00995D;">Unimed ODONTO</h2>
-                <p><b>Par Ideal:</b> <span style="background-color:#e0ebd8; padding: 3px 8px; border-radius:4px; font-weight:bold;">{equiv_unimed}</span></p>
+                <p><b>Par Ideal:</b> <span style="background-color:#e0ebd8; padding: 3px 8px; border-radius:4px; font-weight:bold; color:#006633;">{equiv_unimed}</span></p>
                 <hr style="border: 0; border-top: 1px solid #eee;">
                 {"".join([f"<p style='margin:4px 0;'>• <b>{nomes_coberturas[c]}:</b> {linha_uni[c]}</p>" for c in coberturas])}
             </div>
