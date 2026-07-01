@@ -262,10 +262,12 @@ if plano_selecionado:
             badge_class = "badge-sim" if linha_cong[c] == "SIM" else "badge-nao"
             itens_html_cong += f'<div class="coverage-item">{nomes_coberturas[c]}<span class="badge {badge_class}">{linha_cong[c]}</span></div>'
         
-        # Ajustado: Título fixado com cores escuras e o nome real do plano concorrente inserido inline ao lado da lupa
+        # FIXADO: Tag <div> com cor escura explícita protegida contra os temas do Streamlit
         html_card_cong = f"""
 <div class="comp-card concorrente">
-<h3 style="color: #4A5568 !important; font-weight: 700; margin-top: 0; font-size: 1.35rem !important; line-height: 1.2;">🔍 {op_selecionada} — {plano_selecionado}</h3>
+<div style="color: #2D3748 !important; font-weight: 700; margin-top: 0; margin-bottom: 12px; font-size: 22px !important; line-height: 1.2; display: flex; align-items: center; gap: 8px;">
+    <span>🔍</span> <span style="color: #2D3748 !important;">{op_selecionada} — {plano_selecionado}</span>
+</div>
 <p style="font-size:14px; margin: 0 0 15px 0; color: #718096 !important;"><b>Modalidade:</b> {contratacao_selecionada}</p>
 {itens_html_cong}
 </div>
@@ -278,10 +280,13 @@ if plano_selecionado:
             badge_class = "badge-sim" if linha_uni[c] == "SIM" else "badge-nao"
             itens_html_uni += f'<div class="coverage-item">{nomes_coberturas[c]}<span class="badge {badge_class}">{linha_uni[c]}</span></div>'
             
+        # FIXADO: O nome do plano recomendado agora aparece diretamente na estrutura do título ao lado do dente
         html_card_uni = f"""
 <div class="comp-card unimed">
-<h3 style="color: #00995D !important; font-weight: 700; margin-top: 0; font-size: 1.35rem !important; line-height: 1.2;">🦷 Proposta Unimed Odonto</h3>
-<p style="font-size:14px; margin: 0 0 15px 0; color: #006633 !important;"><b>Par Ideal:</b> {equiv_unimed}</p>
+<div style="color: #00995D !important; font-weight: 700; margin-top: 0; margin-bottom: 12px; font-size: 22px !important; line-height: 1.2; display: flex; align-items: center; gap: 8px;">
+    <span>🦷</span> <span style="color: #00995D !important;">Unimed ODONTO — {equiv_unimed}</span>
+</div>
+<p style="font-size:14px; margin: 0 0 15px 0; color: #006633 !important;"><b>Par Ideal Técnica Mapeada</b></p>
 {itens_html_uni}
 </div>
 """
