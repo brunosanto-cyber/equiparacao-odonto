@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import base64
+import os
 
 # Configuração inicial avançada da página web
 st.set_page_config(
@@ -8,6 +10,16 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed"
 )
+
+# === FUNÇÃO AUXILIAR: CONVERSÃO DO LOGOTIPO PARA BASE64 ===
+def obter_logo_base64(caminho_imagem):
+    if os.path.exists(caminho_imagem):
+        with open(caminho_imagem, "rb") as arquivo_img:
+            return f"data:image/png;base64,{base64.b64encode(arquivo_img.read()).decode()}"
+    # Caso o usuário ainda não tenha subido o logo.png, exibe um ícone fallback de dente
+    return "https://img.icons8.com/color/tooth.png"
+
+logo_unimed_html = obter_logo_base64("logo.png")
 
 # === DESIGN SYSTEM & CUSTOM CSS (IDENTIDADE UNIMED ODONTO) ===
 st.markdown("""
@@ -26,26 +38,31 @@ st.markdown("""
             margin-bottom: 30px;
             box-shadow: 0 4px 20px rgba(0, 153, 93, 0.15);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            position: relative;
         }
         
-        /* Imagem de dente no banner */
-        .tooth-banner-img {
-            float: right;
-            max-width: 60px;
-            position: absolute;
-            right: 30px;
-            top: 30px;
+        /* Alinhamento flexível para Logo + Novo Título */
+        .header-container {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        
+        .logo-unimed-img {
+            max-height: 55px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
         }
         
         .unimed-banner h1 {
             color: white !important;
-            margin: 0;
-            font-size: 32px;
+            margin: 0 !important;
+            font-size: 30px !important;
             font-weight: 700;
+            line-height: 1.2;
         }
         .unimed-banner p {
-            margin: 5px 0 0 0;
+            margin: 12px 0 0 0;
             font-size: 16px;
             opacity: 0.9;
         }
@@ -199,11 +216,13 @@ nomes_coberturas = {
     "Clar": "Clareamento Estético", "Reemb": "Reembolso"
 }
 
-# === BANNER DE ENTRADA ===
-st.markdown("""
-    <div class="unimed-banner">
-        <img src="https://img.icons8.com/color/tooth.png" alt="Dente Icon" class="tooth-banner-img">
-        <h1>🛡️ Portal Comercial Unimed Odonto</h1>
+# === BANNER DE ENTRADA ATUALIZADO COM O LOGO E NOVO TÍTULO ===
+st.markdown(f"""
+    <div class="unimod-banner">
+        <div class="header-container">
+            <img src="{logo_unimed_html}" alt="Logo Unimed Odonto" class="logo-unimed-img">
+            <h1>Portal Equivalência de Planos - Odonto</h1>
+        </div>
         <p>Plataforma Inteligente de Equiparação de Planos e Análise de Coberturas da Concorrência</p>
     </div>
 """, unsafe_allow_html=True)
@@ -262,7 +281,7 @@ if plano_selecionado:
         """, unsafe_allow_html=True)
         
     with col_m3:
-        status_venda = "Par Perfeito" if porcentagem == 100 else ("Equivalente" if porcentagem >= 70 else "Ajuste Necessário")
+        status_venda = "Par Perfeito" if porcentagem == 100 else ("Equivalente" if porcentagem >= 70 else "Ajuste Necessary")
         st.markdown(f"""
             <div class="metric-box">
                 <div class="metric-label">Status Comercial</div>
