@@ -3,7 +3,7 @@ import pandas as pd
 import base64
 import os
 
-# Configuração inicial avançada da página web
+# Configuração inicial da página
 st.set_page_config(
     page_title="Equiparação Corporativa - Unimed Odonto",
     page_icon="🦷",
@@ -11,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# === FUNÇÃO AUXILIAR: CONVERSÃO DO LOGOTIPO PARA BASE64 ===
+# === FUNÇÃO: CONVERSÃO DA LOGO PARA BASE64 ===
 def obter_logo_base64(caminho_imagem):
     if os.path.exists(caminho_imagem):
         with open(caminho_imagem, "rb") as arquivo_img:
@@ -20,295 +20,185 @@ def obter_logo_base64(caminho_imagem):
 
 logo_unimed_html = obter_logo_base64("foto.png")
 
-# === DESIGN SYSTEM & CUSTOM CSS (IDENTIDADE UNIMED ODONTO) ===
-st.markdown("""
+# === DESIGN SYSTEM: BLINDAGEM DE CORES (FIXO PARA MODO CLARO E ESCURO) ===
+st.markdown(f"""
     <style>
-        /* Fundo da aplicação */
-        .stApp {
-            background-color: #FAFAFA;
-        }
+        /* Fundo geral da página */
+        .stApp {{
+            background-color: #F0F2F6 !important;
+        }}
+
+        /* BANNER PRINCIPAL - Cores Unimed Odonto Travadas */
+        .unimed-banner-blindado {{
+            background: linear-gradient(135deg, #00995D 0%, #004D26 100%) !important;
+            padding: 30px !important;
+            border-radius: 15px !important;
+            margin-bottom: 25px !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+            color: white !important;
+        }}
+
+        /* CARDS DE MÉTRICAS - Fundo branco e texto escuro fixos */
+        .metric-card-blindado {{
+            background-color: #FFFFFF !important;
+            padding: 20px !important;
+            border-radius: 12px !important;
+            border-bottom: 5px solid #00995D !important;
+            text-align: center !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+        }}
+        .metric-label-blindado {{
+            color: #555555 !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            text-transform: uppercase !important;
+        }}
+        .metric-value-blindado {{
+            font-size: 28px !important;
+            font-weight: 700 !important;
+            margin-top: 5px !important;
+        }}
+
+        /* CARDS COMPARATIVOS - Blindagem contra modo escuro */
+        .comp-card-blindado {{
+            background-color: #FFFFFF !important;
+            padding: 25px !important;
+            border-radius: 12px !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+            margin-bottom: 20px !important;
+            min-height: 450px !important;
+        }}
         
-        /* Cards de Métricas Rápidas */
-        .metric-box {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            text-align: center;
-            border-bottom: 4px solid #E2E8F0;
-        }
-        .metric-value {
-            font-size: 32px;
-            font-weight: 700;
-            margin: 5px 0;
-        }
-        .metric-label {
-            font-size: 12px;
-            color: #718096;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+        /* Títulos e Textos dentro dos cards */
+        .card-title-text {{
+            font-size: 22px !important;
+            font-weight: 700 !important;
+            margin-bottom: 15px !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 10px !important;
+        }}
         
-        /* Bloco de Comparação Lado a Lado */
-        .comp-card {
-            background-color: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.04);
-            margin-bottom: 25px;
-        }
-        .comp-card.concorrente {
-            border-top: 5px solid #718096;
-        }
-        .comp-card.unimed {
-            border-top: 5px solid #00995D;
-            background-color: #F7FDFB;
-            border-left: 1px solid #E6F4EA;
-        }
-        
-        /* Badges de Cobertura SIM/NÃO */
-        .badge {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 700;
-            float: right;
-        }
-        .badge-sim { background-color: #E6F4EA; color: #137333; }
-        .badge-nao { background-color: #FCE8E6; color: #C5221F; }
-        
-        /* Linhas da listagem de coberturas */
-        .coverage-item {
-            padding: 10px 0;
-            border-bottom: 1px solid #EDF2F7;
-            font-size: 14px;
-            color: #2D3748;
-        }
-        
-        /* Card de Conclusões Comerciais */
-        .insight-box {
-            background-color: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            border-left: 5px solid #004D26;
-        }
+        .coverage-item-blindado {{
+            padding: 12px 0 !important;
+            border-bottom: 1px solid #EEEEEE !important;
+            color: #333333 !important; /* Texto escuro sempre visível */
+            font-size: 15px !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+        }}
+
+        /* Badges de SIM/NÃO */
+        .badge-sim-fixo {{ background-color: #E6F4EA !important; color: #137333 !important; padding: 4px 12px !important; border-radius: 20px !important; font-weight: 700 !important; font-size: 12px !important; }}
+        .badge-nao-fixo {{ background-color: #FCE8E6 !important; color: #C5221F !important; padding: 4px 12px !important; border-radius: 20px !important; font-weight: 700 !important; font-size: 12px !important; }}
+
+        /* Títulos de seção fora de cards */
+        .section-header-fixo {{
+            color: #1E293B !important;
+            font-weight: 700 !important;
+            margin: 20px 0 !important;
+        }}
     </style>
 """, unsafe_allow_html=True)
 
-# === BANCO DE DADOS ATUALIZADO E REVISADO (RADAR DE MERCADO) ===
+# === BANCO DE DADOS (DADOS DOS DOCUMENTOS ANEXADOS) ===
 dados_planos = [
-    # --- UNIMED ODONTO (Linha de Base - Ref: Página 1 e 7) ---
     {"Operadora": "Unimed ODONTO", "Plano": "Essencial", "Contratacao": "PRATELEIRA", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "Unimed ODONTO", "Plano": "Essencial Plus", "Contratacao": "PRATELEIRA", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus"},
     {"Operadora": "Unimed ODONTO", "Plano": "Essencial Plus Doc", "Contratacao": "PRATELEIRA", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"},
     {"Operadora": "Unimed ODONTO", "Plano": "Pleno", "Contratacao": "PRATELEIRA", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"},
     {"Operadora": "Unimed ODONTO", "Plano": "Pleno Top", "Contratacao": "PRATELEIRA", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "NÃO", "Equiv": "Pleno Top"},
-
-    # --- ODONTOPREV (Ref: Página 1) ---
-    {"Operadora": "OdontoPrev", "Plano": "Dental Júnior", "Contratacao": "Individual", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "OdontoPrev", "Plano": "Bem-Estar", "Contratacao": "Individual", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "OdontoPrev", "Plano": "Bem-Estar Orto", "Contratacao": "Individual", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"},
-    {"Operadora": "OdontoPrev", "Plano": "Integral", "Contratacao": "PME e MEI", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "OdontoPrev", "Plano": "Master", "Contratacao": "PME e MEI", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "NÃO", "Equiv": "Pleno Top"},
-    {"Operadora": "OdontoPrev", "Plano": "Convencional", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "OdontoPrev", "Plano": "Integral Doc", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"},
     {"Operadora": "OdontoPrev", "Plano": "Premium", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "SIM", "Equiv": "Pleno Top"},
-    {"Operadora": "OdontoPrev", "Plano": "Superior", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "SIM", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"},
-
-    # --- HAPVIDA ODONTO (Ref: Página 2) ---
-    {"Operadora": "Hapvida Odonto", "Plano": "Smart Odonto", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "Hapvida Odonto", "Plano": "Top Premium DO", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"},
     {"Operadora": "Hapvida Odonto", "Plano": "Top Premium Orto", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"},
-    {"Operadora": "Hapvida Odonto", "Plano": "Odonto Premium Free", "Contratacao": "Individual", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-
-    # --- PORTO SEGURO (Ref: Página 2) ---
-    {"Operadora": "Porto Seguro", "Plano": "Bronze 10", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "Porto Seguro", "Plano": "Bronze Integral Doc 10", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"},
-    {"Operadora": "Porto Seguro", "Plano": "Ouro Premium 10", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "SIM", "Equiv": "Pleno Top"},
-
-    # --- SULAMÉRICA (Ref: Página 2 e 3) ---
-    {"Operadora": "SulAmérica", "Plano": "Mais", "Contratacao": "Individual", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus"},
-    {"Operadora": "SulAmérica", "Plano": "Mais Doc", "Contratacao": "Individual", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"},
-    {"Operadora": "SulAmérica", "Plano": "Mais", "Contratacao": "PME e MEI", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus"},
-    {"Operadora": "SulAmérica", "Plano": "Mais Orto", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"},
-    {"Operadora": "SulAmérica", "Plano": "Premium", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "SIM", "Equiv": "Pleno Top"},
-
-    # --- AMIL DENTAL (Ref: Página 3) ---
-    {"Operadora": "Amil Dental", "Plano": "Dental 205", "Contratacao": "Individual", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "Amil Dental", "Plano": "Ortodontia E80", "Contratacao": "Individual", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"},
-    {"Operadora": "Amil Dental", "Plano": "Dental 205", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "Amil Dental", "Plano": "Orto + Prótese E170", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno Top"},
-
-    # --- METLIFE (Ref: Página 4) ---
-    {"Operadora": "MetLife", "Plano": "MetLife Essencial", "Contratacao": "Individual", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "MetLife", "Plano": "MetLife Doc", "Contratacao": "Individual", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"},
-    {"Operadora": "MetLife", "Plano": "Gold Doc", "Contratacao": "PME e MEI", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"},
     {"Operadora": "MetLife", "Plano": "Premium", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "SIM", "Equiv": "Pleno Top"},
-
-    # --- DENTAL UNI (Ref: Página 4) ---
-    {"Operadora": "Dental Uni", "Plano": "Essencial", "Contratacao": "Individual", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "Dental Uni", "Plano": "Dental Amplo DOC", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"},
-
-    # --- INPAO (Ref: Página 4 e 5) ---
-    {"Operadora": "INPAO Dental", "Plano": "Especial", "Contratacao": "PME e MEI", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "INPAO Dental", "Plano": "Especial Orto", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"},
-
-    # --- ODONTO EMPRESAS (Ref: Página 5) ---
-    {"Operadora": "Odonto Empresas", "Plano": "Sigma", "Contratacao": "Individual", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "Odonto Empresas", "Plano": "Alfa Orto", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"},
-
-    # --- BB DENTAL (Ref: Página 5) ---
-    {"Operadora": "BB Dental", "Plano": "Dental Essência", "Contratacao": "Individual", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "BB Dental", "Plano": "Integral Doc", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"}
+    {"Operadora": "Amil Dental", "Plano": "Dental 205", "Contratacao": "Individual", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "Amil Dental", "Plano": "Orto + Prótese E170", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno Top"}
 ]
 
 df_base = pd.DataFrame(dados_planos)
 coberturas = ["Rol", "Doc", "Manut", "Prot", "Clar", "Reemb"]
-nomes_coberturas = {
-    "Rol": "Rol ANS Clínico", "Doc": "Documentação Ortodôntica", 
-    "Manut": "Manutenção de Aparelho", "Prot": "Próteses Além do Rol", 
-    "Clar": "Clareamento Estético", "Reemb": "Reembolso"
-}
+nomes_cobs = {"Rol": "Rol ANS Clínico", "Doc": "Documentação Ortodôntica", "Manut": "Manutenção de Aparelho", "Prot": "Próteses Além do Rol", "Clar": "Clareamento Estético", "Reemb": "Reembolso"}
 
-# === BANNER DE ENTRADA CORRIGIDO COM ESTILOS EM LINHA (INLINE) ===
+# === UI: CABEÇALHO ===
 st.markdown(f"""
-    <div style="background: linear-gradient(135deg, #00995D 0%, #004D26 100%); padding: 35px 30px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0, 153, 93, 0.15); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-        <div style="display: flex; align-items: center; gap: 18px;">
-            <img src="{logo_unimed_html}" style="max-height: 55px; width: auto; object-fit: contain; border-radius: 4px;">
-            <h1 style="color: white !important; margin: 0 !important; font-size: 30px !important; font-weight: 700; line-height: 1.2; border: none !important; background: transparent !important;">Portal Equivalência de Planos - Odonto</h1>
+    <div class="unimed-banner-blindado">
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <img src="{logo_unimed_html}" style="max-height: 60px; border-radius: 8px;">
+            <h1 style="margin:0; color: white !important; font-size: 32px; border:none;">Portal Equivalência de Planos - Odonto</h1>
         </div>
-        <p style="margin: 12px 0 0 0; font-size: 16px; opacity: 0.9; color: white !important;">Plataforma Inteligente de Equiparação de Planos e Análise de Coberturas da Concorrência</p>
+        <p style="margin: 10px 0 0 80px; color: white !important; opacity: 0.9;">Análise de Coberturas e Equiparação Inteligente de Mercado</p>
     </div>
 """, unsafe_allow_html=True)
 
-# === FILTROS DE SELEÇÃO TRIPLO ===
-col_box1, col_box2, col_box3 = st.columns(3)
+# === FILTROS ===
+col1, col2, col3 = st.columns(3)
+with col1:
+    op_sel = st.selectbox("🎯 Operadora Concorrente:", sorted([op for op in df_base["Operadora"].unique() if op != "Unimed ODONTO"]))
+with col2:
+    mod_sel = st.selectbox("💼 Modelo de Contratação:", sorted(df_base[df_base["Operadora"] == op_sel]["Contratacao"].unique()))
+with col3:
+    plano_sel = st.selectbox("📋 Plano da Concorrência:", df_base[(df_base["Operadora"] == op_sel) & (df_base["Contratacao"] == mod_sel)]["Plano"].tolist())
 
-with col_box1:
-    operadoras_disponiveis = sorted([op for op in df_base["Operadora"].unique() if op != "Unimed ODONTO"])
-    op_selecionada = st.selectbox("🎯 1. Escolha a Operadora Concorrente:", operadoras_disponiveis)
+# === PROCESSAMENTO ===
+if plano_sel:
+    linha_cong = df_base[(df_base["Operadora"] == op_sel) & (df_base["Plano"] == plano_sel)].iloc[0]
+    equiv_uni = linha_cong["Equiv"]
+    linha_uni = df_base[(df_base["Operadora"] == "Unimed ODONTO") & (df_base["Plano"] == equiv_uni)].iloc[0]
 
-with col_box2:
-    contratacoes_disponiveis = sorted(df_base[df_base["Operadora"] == op_selecionada]["Contratacao"].unique().tolist())
-    contratacao_selecionada = st.selectbox("💼 2. Modelo de Contratação:", contratacoes_disponiveis)
-
-with col_box3:
-    planos_filtrados = df_base[(df_base["Operadora"] == op_selecionada) & (df_base["Contratacao"] == contratacao_selecionada)]["Plano"].tolist()
-    plano_selecionado = st.selectbox("📋 3. Escolha o Plano da Concorrência:", planos_filtrados)
-
-# === PROCESSAMENTO DE DADOS E DESIGN DOS RESULTADOS ===
-if plano_selecionado:
-    linha_cong = df_base[(df_base["Operadora"] == op_selecionada) & (df_base["Contratacao"] == contratacao_selecionada) & (df_base["Plano"] == plano_selecionado)].iloc[0]
-    equiv_unimed = linha_cong["Equiv"]
-    linha_uni = df_base[(df_base["Operadora"] == "Unimed ODONTO") & (df_base["Plano"] == equiv_unimed)].iloc[0]
-    
     iguais, faltas, diferenciais = 0, [], []
-    for cob in coberturas:
-        if linha_cong[cob] == linha_uni[cob]: 
-            iguais += 1
-        elif linha_uni[cob] == "SIM" and linha_cong[cob] == "NÃO": 
-            faltas.append(nomes_coberturas[cob])
-        elif linha_cong[cob] == "SIM" and linha_uni[cob] == "NÃO": 
-            diferenciais.append(nomes_coberturas[cob])
-            
-    porcentagem = (iguais / len(coberturas)) * 100
-    color_perc = "#00995D" if porcentagem == 100 else ("#A2C027" if porcentagem >= 70 else "#E05353")
-
-    # MÓDULO 1: INDICADORES DE ADERÊNCIA
-    st.markdown("### 📈 Indicadores de Aderência")
-    col_m1, col_m2, col_m3 = st.columns(3)
+    for c in coberturas:
+        if linha_cong[c] == linha_uni[c]: iguais += 1
+        elif linha_uni[c] == "SIM" and linha_cong[c] == "NÃO": faltas.append(nomes_cobs[c])
+        elif linha_cong[c] == "SIM" and linha_uni[c] == "NÃO": diferenciais.append(nomes_cobs[c])
     
-    with col_m1:
+    porcentagem = (iguais / 6) * 100
+    cor_perc = "#00995D" if porcentagem == 100 else ("#A2C027" if porcentagem >= 70 else "#E05353")
+
+    # Módulo de Indicadores
+    st.markdown("<h3 class='section-header-fixo'>📊 Indicadores de Aderência</h3>", unsafe_allow_html=True)
+    m_col1, m_col2, m_col3 = st.columns(3)
+    
+    with m_col1:
+        st.markdown(f'<div class="metric-card-blindado"><div class="metric-label-blindado">Equiparação</div><div class="metric-value-blindado" style="color:{cor_perc} !important;">{porcentagem:.1f}%</div></div>', unsafe_allow_html=True)
+    with m_col2:
+        st.markdown(f'<div class="metric-card-blindado"><div class="metric-label-blindado">Sugestão Unimed</div><div class="metric-value-blindado" style="color:#004D26 !important;">{equiv_uni}</div></div>', unsafe_allow_html=True)
+    with m_col3:
+        status = "Par Perfeito" if porcentagem == 100 else ("Equivalente" if porcentagem >= 70 else "Gap Técnico")
+        st.markdown(f'<div class="metric-card-blindado"><div class="metric-label-blindado">Status Comercial</div><div class="metric-value-blindado" style="color:#2D3748 !important;">{status}</div></div>', unsafe_allow_html=True)
+
+    st.markdown(f'<div style="width:100%; background:#DDD; height:8px; border-radius:4px; margin:20px 0;"><div style="width:{porcentagem}%; background:{cor_perc}; height:100%; border-radius:4px;"></div></div>', unsafe_allow_html=True)
+
+    # Módulo Comparativo Lado a Lado
+    c_col1, c_col2 = st.columns(2)
+    
+    with c_col1:
+        cobs_html = "".join([f'<div class="coverage-item-blindado">{nomes_cobs[c]} <span class="{"badge-sim-fixo" if linha_cong[c]=="SIM" else "badge-nao-fixo"}">{linha_cong[c]}</span></div>' for c in coberturas])
         st.markdown(f"""
-            <div class="metric-box">
-                <div class="metric-label">Percentual de Equiparação</div>
-                <div class="metric-value" style="color: {color_perc};">{porcentagem:.1f}%</div>
-            </div>
-        """, unsafe_allow_html=True)
-        
-    with col_m2:
-        st.markdown(f"""
-            <div class="metric-box">
-                <div class="metric-label">Recomendação Unimed</div>
-                <div class="metric-value" style="color: #004D26; font-size:24px; padding-top:8px;">{equiv_unimed}</div>
-            </div>
-        """, unsafe_allow_html=True)
-        
-    with col_m3:
-        status_venda = "Par Perfeito" if porcentagem == 100 else ("Equivalente" if porcentagem >= 70 else "Ajuste Necessário")
-        st.markdown(f"""
-            <div class="metric-box">
-                <div class="metric-label">Status Comercial</div>
-                <div class="metric-value" style="color: #4A5568; font-size:26px; padding-top:5px;">{status_venda}</div>
+            <div class="comp-card-blindado" style="border-top: 6px solid #718096 !important;">
+                <div class="card-title-text" style="color: #2D3748 !important;">🔍 {op_sel} — {plano_sel}</div>
+                <p style="color: #666 !important; font-size: 14px; margin-bottom: 20px;">Modalidade: {mod_sel}</p>
+                {cobs_html}
             </div>
         """, unsafe_allow_html=True)
 
-    # Barra visual de progresso estilizada
+    with c_col2:
+        uni_html = "".join([f'<div class="coverage-item-blindado">{nomes_cobs[c]} <span class="{"badge-sim-fixo" if linha_uni[c]=="SIM" else "badge-nao-fixo"}">{linha_uni[c]}</span></div>' for c in coberturas])
+        st.markdown(f"""
+            <div class="comp-card-blindado" style="border-top: 6px solid #00995D !important; background-color: #F7FDFB !important;">
+                <div class="card-title-text" style="color: #00995D !important;">🦷 Unimed ODONTO — {equiv_uni}</div>
+                <p style="color: #004D26 !important; font-size: 14px; margin-bottom: 20px;">Par Ideal Mapeado</p>
+                {uni_html}
+            </div>
+        """, unsafe_allow_html=True)
+
+    # Insights
     st.markdown(f"""
-        <div style="width: 100%; background-color: #E2E8F0; border-radius: 4px; margin-bottom: 35px; height: 8px;">
-            <div style="width: {porcentagem}%; background-color: {color_perc}; height: 100%; border-radius: 4px;"></div>
+        <div class="insight-box" style="background-color: white !important; border-left: 6px solid #004D26 !important; padding: 20px !important;">
+            <h4 style="color: #004D26 !important; margin-top:0;">💡 Argumentos de Vendas</h4>
+            <p style="color: #333 !important; margin: 10px 0;"><b>Gap Negativo (Falta no Concorrente):</b><br> <span style="color:#C5221F;">{", ".join(faltas) if faltas else "Plano Concorrente cobre tudo."}</span></p>
+            <p style="color: #333 !important; margin: 10px 0;"><b>Diferencial Concorrente:</b><br> <span style="color:#137333;">{", ".join(diferenciais) if diferenciais else "Nenhum diferencial extra detectado."}</span></p>
         </div>
     """, unsafe_allow_html=True)
-
-    # MÓDULO 2: COMPARATIVO TÉCNICO E ESTRUTURAL
-    col_c1, col_c2 = st.columns(2)
-    
-    with col_c1:
-        itens_html_cong = ""
-        for c in coberturas:
-            badge_class = "badge-sim" if linha_cong[c] == "SIM" else "badge-nao"
-            itens_html_cong += f'<div class="coverage-item">{nomes_coberturas[c]}<span class="badge {badge_class}">{linha_cong[c]}</span></div>'
-        
-        # FIXADO: Tag <div> com cor escura explícita protegida contra os temas do Streamlit
-        html_card_cong = f"""
-<div class="comp-card concorrente">
-<div style="color: #2D3748 !important; font-weight: 700; margin-top: 0; margin-bottom: 12px; font-size: 22px !important; line-height: 1.2; display: flex; align-items: center; gap: 8px;">
-    <span>🔍</span> <span style="color: #2D3748 !important;">{op_selecionada} — {plano_selecionado}</span>
-</div>
-<p style="font-size:14px; margin: 0 0 15px 0; color: #718096 !important;"><b>Modalidade:</b> {contratacao_selecionada}</p>
-{itens_html_cong}
-</div>
-"""
-        st.markdown(html_card_cong, unsafe_allow_html=True)
-        
-    with col_c2:
-        itens_html_uni = ""
-        for c in coberturas:
-            badge_class = "badge-sim" if linha_uni[c] == "SIM" else "badge-nao"
-            itens_html_uni += f'<div class="coverage-item">{nomes_coberturas[c]}<span class="badge {badge_class}">{linha_uni[c]}</span></div>'
-            
-        # FIXADO: O nome do plano recomendado agora aparece diretamente na estrutura do título ao lado do dente
-        html_card_uni = f"""
-<div class="comp-card unimed">
-<div style="color: #00995D !important; font-weight: 700; margin-top: 0; margin-bottom: 12px; font-size: 22px !important; line-height: 1.2; display: flex; align-items: center; gap: 8px;">
-    <span>🦷</span> <span style="color: #00995D !important;">Unimed ODONTO — {equiv_unimed}</span>
-</div>
-<p style="font-size:14px; margin: 0 0 15px 0; color: #006633 !important;"><b>Par Ideal Técnica Mapeada</b></p>
-{itens_html_uni}
-</div>
-"""
-        st.markdown(html_card_uni, unsafe_allow_html=True)
-
-    # MÓDULO 3: RELATÓRIO DE INSIGHTS E GAPS PARA VENDAS
-    html_insights = f"""
-<div class="insight-box">
-<h3 style="color: #004D26; margin-top:0; font-size:18px;">💡 Estratégia de Abordagem Comercial</h3>
-<p style="font-size:14px; margin-bottom:8px;">Use os argumentos técnicos abaixo para fechar o negócio:</p>
-<p style="font-size:14px; margin: 4px 0;">
-<span style="color:#C5221F; font-weight:700;">❌ O que o concorrente deixa a desejar (Faltas):</span><br>
-<span style="color:#555; padding-left:15px; display:inline-block;">
-{', '.join(faltas) if faltas else '<i>Nenhum gap negativo. O plano da concorrência possui cobertura técnica equivalente ou superior.</i>'}
-</span>
-</p>
-<p style="font-size:14px; margin: 12px 0 4px 0;">
-<span style="color:#137333; font-weight:700;">⭐ Diferenciais do Concorrente (A mais):</span><br>
-<span style="color:#555; padding-left:15px; display:inline-block;">
-{', '.join(diferenciais) if diferenciais else '<i>Nenhum extra detectado. A Unimed Odonto cobre rigorosamente os mesmos pontos.</i>'}
-</span>
-</p>
-</div>
-"""
-    st.markdown(html_insights, unsafe_allow_html=True)
