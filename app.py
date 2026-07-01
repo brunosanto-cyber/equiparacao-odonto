@@ -12,14 +12,14 @@ st.set_page_config(
 )
 
 # === FUNÇÃO AUXILIAR: CONVERSÃO DO LOGOTIPO PARA BASE64 ===
+# Configurado para ler diretamente o arquivo "foto.png" do seu repositório
 def obter_logo_base64(caminho_imagem):
     if os.path.exists(caminho_imagem):
         with open(caminho_imagem, "rb") as arquivo_img:
             return f"data:image/png;base64,{base64.b64encode(arquivo_img.read()).decode()}"
-    # Caso o usuário ainda não tenha subido o logo.png, exibe um ícone fallback de dente
     return "https://img.icons8.com/color/tooth.png"
 
-logo_unimed_html = obter_logo_base64("logo.png")
+logo_unimed_html = obter_logo_base64("foto.png")
 
 # === DESIGN SYSTEM & CUSTOM CSS (IDENTIDADE UNIMED ODONTO) ===
 st.markdown("""
@@ -27,44 +27,6 @@ st.markdown("""
         /* Fundo da aplicação */
         .stApp {
             background-color: #FAFAFA;
-        }
-        
-        /* Banner principal Unimed */
-        .unimed-banner {
-            background: linear-gradient(135deg, #00995D 0%, #004D26 100%);
-            padding: 35px 30px;
-            border-radius: 12px;
-            color: white;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 20px rgba(0, 153, 93, 0.15);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        /* Alinhamento flexível para Logo + Novo Título */
-        .header-container {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-        
-        .logo-unimed-img {
-            max-height: 55px;
-            width: auto;
-            object-fit: contain;
-            border-radius: 4px;
-        }
-        
-        .unimed-banner h1 {
-            color: white !important;
-            margin: 0 !important;
-            font-size: 30px !important;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-        .unimed-banner p {
-            margin: 12px 0 0 0;
-            font-size: 16px;
-            opacity: 0.9;
         }
         
         /* Cards de Métricas Rápidas */
@@ -141,7 +103,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# === BANCO DE DADOS ATUALIZADO E REVISADO ===
+# === BANCO DE DADOS ATUALIZADO E REVISADO (RADAR DE MERCADO) ===
 dados_planos = [
     # --- UNIMED ODONTO (Linha de Base - Ref: Página 1 e 7) ---
     {"Operadora": "Unimed ODONTO", "Plano": "Essencial", "Contratacao": "PRATELEIRA", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
@@ -216,14 +178,15 @@ nomes_coberturas = {
     "Clar": "Clareamento Estético", "Reemb": "Reembolso"
 }
 
-# === BANNER DE ENTRADA ATUALIZADO COM O LOGO E NOVO TÍTULO ===
+# === BANNER DE ENTRADA CORRIGIDO COM ESTILOS EM LINHA (INLINE) COMPATÍVEL COM MODO ESCURO ===
+# Força o fundo verde e o texto branco em qualquer tema do Streamlit
 st.markdown(f"""
-    <div class="unimod-banner">
-        <div class="header-container">
-            <img src="{logo_unimed_html}" alt="Logo Unimed Odonto" class="logo-unimed-img">
-            <h1>Portal Equivalência de Planos - Odonto</h1>
+    <div style="background: linear-gradient(135deg, #00995D 0%, #004D26 100%); padding: 35px 30px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0, 153, 93, 0.15); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+        <div style="display: flex; align-items: center; gap: 18px;">
+            <img src="{logo_unimed_html}" style="max-height: 55px; width: auto; object-fit: contain; border-radius: 4px;">
+            <h1 style="color: white !important; margin: 0 !important; font-size: 30px !important; font-weight: 700; line-height: 1.2; border: none !important; background: transparent !important;">Portal Equivalência de Planos - Odonto</h1>
         </div>
-        <p>Plataforma Inteligente de Equiparação de Planos e Análise de Coberturas da Concorrência</p>
+        <p style="margin: 12px 0 0 0; font-size: 16px; opacity: 0.9; color: white !important;">Plataforma Inteligente de Equiparação de Planos e Análise de Coberturas da Concorrência</p>
     </div>
 """, unsafe_allow_html=True)
 
@@ -281,7 +244,7 @@ if plano_selecionado:
         """, unsafe_allow_html=True)
         
     with col_m3:
-        status_venda = "Par Perfeito" if porcentagem == 100 else ("Equivalente" if porcentagem >= 70 else "Ajuste Necessary")
+        status_venda = "Par Perfeito" if porcentagem == 100 else ("Equivalente" if porcentagem >= 70 else "Ajuste Necessário")
         st.markdown(f"""
             <div class="metric-box">
                 <div class="metric-label">Status Comercial</div>
