@@ -20,12 +20,12 @@ def obter_logo_base64(caminho_imagem):
 
 logo_unimed_html = obter_logo_base64("foto.png")
 
-# === DESIGN SYSTEM: FUNDO VERDE UNIMED E TEXTO BRANCO ===
+# === DESIGN SYSTEM: FUNDO GLOBAL CLARO/NEUTRO E CARDS VERDES ===
 st.markdown(f"""
     <style>
-        /* Fundo geral da página (Cinza muito claro para destacar os cards verdes) */
+        /* Fundo global e geral de toda a plataforma (Claro e Neutro) */
         .stApp {{
-            background-color: #F4F7F6 !important;
+            background-color: #F8F9FA !important;
         }}
 
         /* BANNER PRINCIPAL - Verde Unimed */
@@ -34,7 +34,7 @@ st.markdown(f"""
             padding: 30px !important;
             border-radius: 15px !important;
             margin-bottom: 25px !important;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15) !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12) !important;
             color: white !important;
         }}
 
@@ -44,7 +44,7 @@ st.markdown(f"""
             padding: 20px !important;
             border-radius: 12px !important;
             text-align: center !important;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
             color: white !important;
         }}
         .metric-label-blindado {{
@@ -65,7 +65,7 @@ st.markdown(f"""
             background-color: #00995D !important;
             padding: 25px !important;
             border-radius: 15px !important;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15) !important;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1) !important;
             margin-bottom: 20px !important;
             min-height: 480px !important;
             color: white !important;
@@ -97,7 +97,7 @@ st.markdown(f"""
         .badge-sim-verde {{ background-color: #FFFFFF !important; color: #00995D !important; padding: 4px 12px !important; border-radius: 20px !important; font-weight: 700 !important; font-size: 12px !important; }}
         .badge-nao-verde {{ background-color: #FFCDD2 !important; color: #B71C1C !important; padding: 4px 12px !important; border-radius: 20px !important; font-weight: 700 !important; font-size: 12px !important; }}
 
-        /* Títulos de seção */
+        /* Títulos de seção fora dos cards */
         .section-header-fixo {{
             color: #004D26 !important;
             font-weight: 700 !important;
@@ -137,7 +137,7 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# === FILTROS ===
+# === FILTROS COM CONTEXTO ESCURO NATIVO DO STREAMLIT ===
 col1, col2, col3 = st.columns(3)
 with col1:
     op_sel = st.selectbox("🎯 Operadora Concorrente:", sorted([op for op in df_base["Operadora"].unique() if op != "Unimed ODONTO"]))
@@ -159,6 +159,7 @@ if plano_sel:
         elif linha_cong[c] == "SIM" and linha_uni[c] == "NÃO": diferenciais.append(nomes_cobs[c])
     
     porcentagem = (iguais / 6) * 100
+    cor_perc = "#00995D" if porcentagem == 100 else ("#A2C027" if porcentagem >= 70 else "#E05353")
 
     # Módulo de Indicadores
     st.markdown("<h3 class='section-header-fixo'>📊 Indicadores de Aderência</h3>", unsafe_allow_html=True)
@@ -172,8 +173,8 @@ if plano_sel:
         status = "Par Perfeito" if porcentagem == 100 else ("Equivalente" if porcentagem >= 70 else "Gap Técnico")
         st.markdown(f'<div class="metric-card-blindado"><div class="metric-label-blindado">Status Comercial</div><div class="metric-value-blindado">{status}</div></div>', unsafe_allow_html=True)
 
-    # Barra visual de progresso (Fundo branco para destacar no verde)
-    st.markdown(f'<div style="width:100%; background:rgba(0,0,0,0.1); height:10px; border-radius:10px; margin:25px 0;"><div style="width:{porcentagem}%; background:#00995D; height:100%; border-radius:10px; border:2px solid white;"></div></div>', unsafe_allow_html=True)
+    # Barra visual de progresso (Destacada sobre o fundo claro neutro)
+    st.markdown(f'<div style="width:100%; background:rgba(0,0,0,0.08); height:10px; border-radius:10px; margin:25px 0;"><div style="width:{porcentagem}%; background:{cor_perc}; height:100%; border-radius:10px; border:1px solid rgba(255,255,255,0.4);"></div></div>', unsafe_allow_html=True)
 
     # Módulo Comparativo Lado a Lado
     c_col1, c_col2 = st.columns(2)
@@ -200,9 +201,9 @@ if plano_sel:
             </div>
         """, unsafe_allow_html=True)
 
-    # Insights (Card de destaque final)
+    # Card de Estratégia Comercial (Fundo branco para contraste final refinado)
     st.markdown(f"""
-        <div style="background-color: white !important; border-left: 8px solid #00995D !important; padding: 25px !important; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+        <div style="background-color: white !important; border-left: 8px solid #00995D !important; padding: 25px !important; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); margin-top:10px;">
             <h4 style="color: #004D26 !important; margin-top:0;">💡 Argumentos Comerciais Técnicos</h4>
             <p style="color: #444 !important; margin: 10px 0; font-size:15px;"><b>Onde a Concorrência perde (Falta no Concorrente):</b><br> <span style="color:#B71C1C; font-weight:700;">{", ".join(faltas) if faltas else "Plano Concorrente cobre todos os itens básicos."}</span></p>
             <p style="color: #444 !important; margin: 10px 0; font-size:15px;"><b>Diferencial da Concorrência:</b><br> <span style="color:#00796B; font-weight:700;">{", ".join(diferenciais) if diferenciais else "Nenhum extra detectado em relação à prateleira Unimed."}</span></p>
