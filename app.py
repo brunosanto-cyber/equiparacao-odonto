@@ -123,7 +123,7 @@ st.markdown("""
         /* CARD DE ARGUMENTOS COMERCIAIS REFINADO */
         .insight-box-premium {
             background-color: #FFFFFF !important; 
-            border-left: 8px solid #004D26 !important; 
+            border-left: 8px solid #00995D !important; 
             padding: 25px !important; 
             border-radius: 14px !important; 
             box-shadow: 0 4px 20px rgba(0,0,0,0.03) !important;
@@ -195,7 +195,7 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# === MÓDULO DE SELEÇÃO (CARDS SEPARADOS COM LABELS HTML BLINDADOS) ===
+# === MÓDULO DE SELEÇÃO ===
 st.markdown('<div class="filter-container-clean">', unsafe_allow_html=True)
 col1, col2, col3 = st.columns(3)
 with col1:
@@ -220,7 +220,7 @@ if plano_sel:
 
     iguais, faltas, diferenciais = 0, [], []
     for c in coberturas:
-        if linha_cong[c] == linha_uni[c]: iguais += 1
+        if linha_cong[c] == inline_uni := linha_uni[c]: iguais += 1
         elif linha_uni[c] == "SIM" and linha_cong[c] == "NÃO": faltas.append(nomes_cobs[c])
         elif linha_cong[c] == "SIM" and linha_uni[c] == "NÃO": diferenciais.append(nomes_cobs[c])
     
@@ -275,17 +275,19 @@ if plano_sel:
 """
         st.markdown(html_card_uni, unsafe_allow_html=True)
 
-    # Bloco de Insights Estratégicos com Layout Premium e sem recuos de código
+    # === BLOCO DE INSIGHTS CORRIGIDO COM RÓTULOS EM VERDE/VERMELHO E TÍTULO DESTACADO ===
     html_insights = f"""
 <div class="insight-box-premium">
-<div style="color: #004D26 !important; margin-top:0; font-size: 19px !important; font-weight: 700 !important; font-family: 'Inter', sans-serif; margin-bottom: 18px !important; display: flex; align-items: center; gap: 10px;"><span>💡</span> Argumentos Comerciais de Abordagem Técnica</div>
-<div style="margin: 14px 0 !important; font-size:15px !important; font-family: 'Inter', sans-serif;">
-<span style="color: #4A5568 !important; font-weight: 600 !important;">Onde a Concorrência perde (Falta no Concorrente):</span><br>
-<span style="color: #B71C1C !important; font-weight: 700 !important; display: inline-block; margin-top: 6px; font-size: 16px !important;">{", ".join(faltas) if faltas else "Plano Concorrente cobre todos os itens básicos mapeados."}</span>
+<div style="background-color: #E6F4EA !important; color: #004D26 !important; margin-top:0; font-size: 18px !important; font-weight: 700 !important; font-family: 'Inter', sans-serif; margin-bottom: 20px !important; display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,153,93,0.06);">
+<span>💡</span> Argumentos Comerciais de Abordagem Técnica
 </div>
 <div style="margin: 14px 0 !important; font-size:15px !important; font-family: 'Inter', sans-serif;">
-<span style="color: #4A5568 !important; font-weight: 600 !important;">Diferencial de Cobertura Extra da Concorrência:</span><br>
-<span style="color: #00796B !important; font-weight: 700 !important; display: inline-block; margin-top: 6px; font-size: 16px !important;">{", ".join(diferenciais) if diferenciais else "Nenhum extra detectado em relação à prateleira Unimed."}</span>
+<span style="color: #00995D !important; font-weight: 700 !important;">Onde a Concorrência perde (Falta no Concorrente):</span><br>
+<span style="color: #B71C1C !important; font-weight: 700 !important; display: inline-block; margin-top: 4px; font-size: 16px !important;">{", ".join(faltas) if faltas else "Plano Concorrente cobre todos os itens básicos mapeados."}</span>
+</div>
+<div style="margin: 14px 0 !important; font-size:15px !important; font-family: 'Inter', sans-serif;">
+<span style="color: #C5221F !important; font-weight: 700 !important;">Diferencial de Cobertura Extra da Concorrência:</span><br>
+<span style="color: #00796B !important; font-weight: 700 !important; display: inline-block; margin-top: 4px; font-size: 16px !important;">{", ".join(diferenciais) if diferenciais else "Nenhum extra detectado em relação à prateleira Unimed."}</span>
 </div>
 </div>
 """
