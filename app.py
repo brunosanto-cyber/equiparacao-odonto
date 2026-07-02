@@ -28,7 +28,7 @@ st.markdown(f"""
             background-color: #F8F9FA !important;
         }}
 
-        /* CORREÇÃO DO ERRO 1: Forçar a cor escura nos textos dos filtros superiores */
+        /* Forçar a cor escura nos textos dos filtros superiores */
         div[data-testid="stWidgetLabel"] p {{
             color: #2D3748 !important;
             font-weight: 600 !important;
@@ -51,7 +51,7 @@ st.markdown(f"""
             padding: 20px !important;
             border-radius: 12px !important;
             text-align: center !important;
-            box-shadow: 0 4px 12 rgba(0,0,0,0.08) !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
             color: white !important;
         }}
         .metric-label-blindado {{
@@ -142,7 +142,7 @@ dados_planos = [
     # --- PORTO SEGURO (Ref: Página 2) ---
     {"Operadora": "Porto Seguro", "Plano": "Bronze 10", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "Porto Seguro", "Plano": "Bronze Integral Doc 10", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"},
-    {"Operadora": "Porto Seguro", "Ouro Premium 10", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "SIM", "Equiv": "Pleno Top"},
+    {"Operadora": "Porto Seguro", "Plano": "Ouro Premium 10", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "SIM", "Equiv": "Pleno Top"},
 
     # --- SULAMÉRICA (Ref: Página 2 e 3) ---
     {"Operadora": "SulAmérica", "Plano": "Mais", "Contratacao": "Individual", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus"},
@@ -202,7 +202,8 @@ with col1:
 with col2:
     mod_sel = st.selectbox("💼 2. Modelo de Contratação:", sorted(df_base[df_base["Operadora"] == op_sel]["Contratacao"].unique()))
 with col3:
-    plano_sel = st.selectbox("📋 3. Escolha o Plano da Concorrência:", df_base[(df_base["Operadora"] == op_sel) & (df_base["Contratacao"] == mod_sel)]["Plano"].tolist())
+    planos_filtrados = df_base[(df_base["Operadora"] == op_sel) & (df_base["Contratacao"] == mod_sel)]["Plano"].tolist()
+    plano_sel = st.selectbox("📋 3. Escolha o Plano da Concorrência:", planos_filtrados)
 
 # === PROCESSAMENTO ===
 if plano_sel:
@@ -263,7 +264,7 @@ if plano_sel:
             </div>
         """, unsafe_allow_html=True)
 
-    # CORREÇÃO DO ERRO 2: Relatório de Gaps com subheaders 100% visíveis em cor escura permanente
+    # Relatório de Gaps
     html_insights = f"""
         <div style="background-color: #FFFFFF !important; border-left: 8px solid #00995D !important; padding: 25px !important; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); margin-top:10px;">
             <div style="color: #004D26 !important; margin-top:0; font-size: 18px !important; font-weight: 700 !important; margin-bottom: 15px !important;">💡 Argumentos Comerciais Técnicos</div>
