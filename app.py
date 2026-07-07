@@ -20,12 +20,34 @@ def obter_logo_base64(caminho_imagem):
 
 logo_unimed_html = obter_logo_base64("foto.png")
 
-# === DESIGN SYSTEM: FUNDO GLOBAL CLARO/NEUTRO E CARDS VERDES ===
+# === DESIGN SYSTEM: BLINDAGEM DE SITE E ESTILIZAÇÃO PREMIUM ===
 st.markdown(f"""
     <style>
+        /* Importação da fonte executiva Inter */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
         /* Fundo global de toda a plataforma (Claro e Neutro) */
         .stApp {{
             background-color: #F8F9FA !important;
+            font-family: 'Inter', -apple-system, sans-serif !important;
+        }}
+
+        /* 🔒 REMOÇÃO COMPLETA DAS BARRAS E COMPONENTES DE APLICATIVO */
+        [data-testid="stHeader"], .stAppHeader, header, .stActionButton, .stDeployButton {{
+            display: none !important;
+            visibility: hidden !important;
+            height: 0px !important;
+        }}
+        footer {{
+            visibility: hidden !important;
+            display: none !important;
+        }}
+
+        /* Forçar a cor escura nos textos dos filtros superiores */
+        div[data-testid="stWidgetLabel"] p {{
+            color: #2D3748 !important;
+            font-weight: 600 !important;
+            font-size: 14px !important;
         }}
 
         /* BANNER PRINCIPAL - Verde Unimed */
@@ -86,6 +108,21 @@ st.markdown(f"""
         /* Badges customizados para fundo verde */
         .badge-sim-verde {{ background-color: #FFFFFF !important; color: #00995D !important; padding: 4px 12px !important; border-radius: 20px !important; font-weight: 700 !important; font-size: 12px !important; }}
         .badge-nao-verde {{ background-color: #FFCDD2 !important; color: #B71C1C !important; padding: 4px 12px !important; border-radius: 20px !important; font-weight: 700 !important; font-size: 12px !important; }}
+
+        /* Títulos de seção fora dos cards */
+        .section-header-fixo {{
+            color: #004D26 !important;
+            font-weight: 700 !important;
+            margin: 25px 0 15px 0 !important;
+        }}
+
+        /* Estilização para o Botão Expandível Interativo de Apresentação */
+        details summary::-webkit-details-marker {{
+            display: none !important;
+        }}
+        summary {{
+            list-style: none !important;
+        }}
     </style>
 """, unsafe_allow_html=True)
 
@@ -252,22 +289,30 @@ if plano_sel:
 """
         st.markdown(html_card_uni, unsafe_allow_html=True)
 
-    # === REPROJETADO E ESTRUTURADO: ARGUMENTOS COMERCIAIS PREMIUM (ESTILO APRESENTAÇÃO EXECUTIVA) ===
+    # === REPROJETADO E SEGURO: INTERATIVO CLIQUE-PARA-EXPANDIR COM SUB-CARDS EXECUTIVOS ===
     html_insights = f"""
-<div style="background-color: #FFFFFF !important; border-left: 8px solid #00995D !important; padding: 30px !important; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); margin-top: 20px;">
-<div style="background: linear-gradient(135deg, #00995D 0%, #004D26 100%) !important; color: #FFFFFF !important; margin-top:0; font-size: 18px !important; font-weight: 700 !important; font-family: 'Inter', sans-serif; margin-bottom: 25px !important; display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; border-radius: 30px; box-shadow: 0 4px 12px rgba(0,153,93,0.15);">
-<span>💡</span> Argumentos Comerciais de Abordagem Técnica
-</div>
-
+<details style="background-color: #FFFFFF !important; border-left: 8px solid #00995D !important; padding: 25px !important; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); margin-top:10px; cursor: pointer;">
+<summary style="background: linear-gradient(135deg, #00995D 0%, #004D26 100%) !important; color: #FFFFFF !important; margin-top:0; font-size: 16px !important; font-weight: 700 !important; font-family: 'Inter', sans-serif; display: inline-flex; align-items: center; gap: 10px; padding: 10px 22px; border-radius: 30px; box-shadow: 0 4px 12px rgba(0,153,93,0.15); outline: none; transition: transform 0.2s;">
+<span>💡</span> Argumentos Comerciais de Abordagem Técnica &nbsp; <small style="font-size:11px; font-weight:400; color:#E0F2F1;">(Clique para consultar)</small>
+</summary>
+<div style="margin-top: 25px; cursor: default;">
 <div style="background-color: #F4FDFB !important; border: 1px solid #E6F4EA !important; border-left: 5px solid #00995D !important; padding: 20px !important; border-radius: 10px !important; margin-bottom: 18px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.01) !important;">
 <div style="color: #00995D !important; font-weight: 700 !important; font-size: 15px !important; font-family: 'Inter', sans-serif; margin-bottom: 8px !important; text-transform: uppercase; letter-spacing: 0.5px;">Onde a Concorrência perde (Falta no Concorrente):</div>
 <div style="color: #2D3748 !important; font-weight: 600 !important; font-size: 16px !important; font-family: 'Inter', sans-serif; padding-left: 5px;">{", ".join(faltas) if faltas else "Plano Concorrente cobre todos os itens básicos mapeados."}</div>
 </div>
-
 <div style="background-color: #FFF5F5 !important; border: 1px solid #FED7D7 !important; border-left: 5px solid #C5221F !important; padding: 20px !important; border-radius: 10px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.01) !important;">
 <div style="color: #C5221F !important; font-weight: 700 !important; font-size: 15px !important; font-family: 'Inter', sans-serif; margin-bottom: 8px !important; text-transform: uppercase; letter-spacing: 0.5px;">Diferencial de Cobertura Extra da Concorrência:</div>
 <div style="color: #2D3748 !important; font-weight: 600 !important; font-size: 16px !important; font-family: 'Inter', sans-serif; padding-left: 5px;">{", ".join(diferenciais) if diferenciais else "Nenhum extra detectado em relação à prateleira Unimed."}</div>
 </div>
 </div>
+</details>
 """
     st.markdown(html_insights, unsafe_allow_html=True)
+
+# === NOVO: RODAPÉ CORPORATIVO COM A MARCA DA OPERADORA ===
+st.markdown(f"""
+    <div style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #E2E8F0; text-align: center; font-family: 'Inter', sans-serif;">
+        <img src="{logo_unimed_html}" style="max-height: 40px; width: auto; object-fit: contain; margin-bottom: 10px; opacity: 0.85;">
+        <p style="color: #A0AEC0 !important; font-size: 12px; margin: 0; font-weight: 500;">Unimed Odonto © {pd.Timestamp.now().year} — Inteligência de Vendas e Mercado</p>
+    </div>
+""", unsafe_allow_html=True)
