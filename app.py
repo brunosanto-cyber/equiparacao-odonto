@@ -3,7 +3,7 @@ import pandas as pd
 import base64
 import os
 
-# Configuração inicial da página
+# Configuração inicial da página web
 st.set_page_config(
     page_title="Equiparação Corporativa - Unimed Odonto",
     page_icon="🦷",
@@ -32,7 +32,7 @@ st.markdown(f"""
             font-family: 'Inter', -apple-system, sans-serif !important;
         }}
 
-        /* 🔒 REMOÇÃO COMPLETA DAS BARRAS E COMPONENTES DE APLICATIVO */
+        /* 🔒 REMOÇÃO COMPLETA DAS BARRAS NATIVAS DE APLICATIVO */
         [data-testid="stHeader"], .stAppHeader, header, .stActionButton, .stDeployButton {{
             display: none !important;
             visibility: hidden !important;
@@ -60,7 +60,7 @@ st.markdown(f"""
             color: white !important;
         }}
 
-        /* CARDS DE MÉTRICAS - Fundo Verde Unimed e Texto Branco */
+        /* CARDS DE MÉTRICAS */
         .metric-card-blindado {{
             background-color: #00995D !important;
             padding: 20px !important;
@@ -83,7 +83,7 @@ st.markdown(f"""
             color: white !important;
         }}
 
-        /* CARDS COMPARATIVOS - Fundo Verde Unimed */
+        /* CARDS COMPARATIVOS */
         .comp-card-blindado {{
             background-color: #00995D !important;
             padding: 25px !important;
@@ -96,106 +96,141 @@ st.markdown(f"""
         }}
         
         .coverage-item-blindado {{
-            padding: 12px 0 !important;
-            border-bottom: 1px solid rgba(255,255,255,0.2) !important;
+            padding: 10px 0 !important;
+            border-bottom: 1px solid rgba(255,255,255,0.15) !important;
             color: white !important;
-            font-size: 15px !important;
+            font-size: 14px !important;
             display: flex !important;
             justify-content: space-between !important;
             align-items: center !important;
         }}
 
-        /* Badges customizados para fundo verde */
-        .badge-sim-verde {{ background-color: #FFFFFF !important; color: #00995D !important; padding: 4px 12px !important; border-radius: 20px !important; font-weight: 700 !important; font-size: 12px !important; }}
-        .badge-nao-verde {{ background-color: #FFCDD2 !important; color: #B71C1C !important; padding: 4px 12px !important; border-radius: 20px !important; font-weight: 700 !important; font-size: 12px !important; }}
+        /* Badges customizados */
+        .badge-sim-verde {{ background-color: #FFFFFF !important; color: #00995D !important; padding: 3px 10px !important; border-radius: 20px !important; font-weight: 700 !important; font-size: 11px !important; }}
+        .badge-nao-verde {{ background-color: #FFCDD2 !important; color: #B71C1C !important; padding: 3px 10px !important; border-radius: 20px !important; font-weight: 700 !important; font-size: 11px !important; }}
 
-        /* Títulos de seção fora dos cards */
+        /* Títulos de seção */
         .section-header-fixo {{
             color: #004D26 !important;
             font-weight: 700 !important;
             margin: 25px 0 15px 0 !important;
         }}
 
-        /* Estilização para o Botão Expandível Interativo de Apresentação */
-        details summary::-webkit-details-marker {{
-            display: none !important;
-        }}
         summary {{
             list-style: none !important;
+        }}
+        summary::-webkit-details-marker {{
+            display: none !important;
         }}
     </style>
 """, unsafe_allow_html=True)
 
-# === BANCO DE DADOS ATUALIZADO (RADAR DE MERCADO) ===
+# === BANCO DE DADOS REESTRUTURADO COM NOVOS PLANOS UNIMED E COMPETIDORES ===
 dados_planos = [
-    # --- UNIMED ODONTO (Linha de Base - Ref: Página 1 e 7) ---
-    {"Operadora": "Unimed ODONTO", "Plano": "Essencial", "Contratacao": "PRATELEIRA", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "Unimed ODONTO", "Plano": "Essencial Plus", "Contratacao": "PRATELEIRA", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus"},
-    {"Operadora": "Unimed ODONTO", "Plano": "Essencial Plus Doc", "Contratacao": "PRATELEIRA", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"},
-    {"Operadora": "Unimed ODONTO", "Plano": "Pleno", "Contratacao": "PRATELEIRA", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"},
-    {"Operadora": "Unimed ODONTO", "Plano": "Pleno Top", "Contratacao": "PRATELEIRA", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "NÃO", "Equiv": "Pleno Top"},
+    # ================= PLANOS UNIMED ODONTO (DADOS E CATEGORIAS DO PROMPT) =================
+    # --- EMPRESARIAL ---
+    {"Operadora": "Unimed ODONTO", "Plano": "Essencial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "Unimed ODONTO", "Plano": "Essencial Plus", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
+    {"Operadora": "Unimed ODONTO", "Plano": "Essencial Plus DOC", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
+    {"Operadora": "Unimed ODONTO", "Plano": "Pleno", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "SIM", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
+    {"Operadora": "Unimed ODONTO", "Plano": "Pleno Plus", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Plus"},
+    {"Operadora": "Unimed ODONTO", "Plano": "Pleno Plus DOC", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Plus DOC"},
+    {"Operadora": "Unimed ODONTO", "Plano": "Pleno Ortodontia", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
+    {"Operadora": "Unimed ODONTO", "Plano": "Pleno Top", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
+    {"Operadora": "Unimed ODONTO", "Plano": "Unimed Alinhador", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "SIM", "Implantes": "NÃO", "Equiv": "Unimed Alinhador"},
 
-    # --- ODONTOPREV (Ref: Página 1) ---
-    {"Operadora": "OdontoPrev", "Plano": "Dental Júnior", "Contratacao": "Individual", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "OdontoPrev", "Plano": "Bem-Estar", "Contratacao": "Individual", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "OdontoPrev", "Plano": "Bem-Estar Orto", "Contratacao": "Individual", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"},
-    {"Operadora": "OdontoPrev", "Plano": "Integral", "Contratacao": "PME e MEI", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "OdontoPrev", "Plano": "Master", "Contratacao": "PME e MEI", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "NÃO", "Equiv": "Pleno Top"},
-    {"Operadora": "OdontoPrev", "Plano": "Convencional", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "OdontoPrev", "Plano": "Integral Doc", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"},
-    {"Operadora": "OdontoPrev", "Plano": "Premium", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "SIM", "Equiv": "Pleno Top"},
-    {"Operadora": "OdontoPrev", "Plano": "Superior", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "SIM", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"},
+    # --- PME ---
+    {"Operadora": "Unimed ODONTO", "Plano": "Essencial", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "Unimed ODONTO", "Plano": "Essencial Plus", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
+    {"Operadora": "Unimed ODONTO", "Plano": "Essencial Plus DOC", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
+    {"Operadora": "Unimed ODONTO", "Plano": "Pleno", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "SIM", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
+    {"Operadora": "Unimed ODONTO", "Plano": "Pleno Ortodontia", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
+    {"Operadora": "Unimed ODONTO", "Plano": "Unimed Alinhador", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "SIM", "Implantes": "NÃO", "Equiv": "Unimed Alinhador"},
 
-    # --- HAPVIDA ODONTO (Ref: Página 2) ---
-    {"Operadora": "Hapvida Odonto", "Plano": "Smart Odonto", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "Hapvida Odonto", "Plano": "Top Premium DO", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"},
-    {"Operadora": "Hapvida Odonto", "Plano": "Top Premium Orto", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"},
-    {"Operadora": "Hapvida Odonto", "Plano": "Odonto Premium Free", "Contratacao": "Individual", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
+    # --- INDIVIDUAL ---
+    {"Operadora": "Unimed ODONTO", "Plano": "Essencial", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "Unimed ODONTO", "Plano": "Essencial Plus", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
+    {"Operadora": "Unimed ODONTO", "Plano": "Pleno", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "SIM", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
 
-    # --- PORTO SEGURO (Ref: Página 2) ---
-    {"Operadora": "Porto Seguro", "Plano": "Bronze 10", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "Porto Seguro", "Plano": "Bronze Integral Doc 10", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"},
-    {"Operadora": "Porto Seguro", "Plano": "Ouro Premium 10", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "SIM", "Equiv": "Pleno Top"},
 
-    # --- SULAMÉRICA (Ref: Página 2 e 3) ---
-    {"Operadora": "SulAmérica", "Plano": "Mais", "Contratacao": "Individual", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus"},
-    {"Operadora": "SulAmérica", "Plano": "Mais Doc", "Contratacao": "Individual", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"},
-    {"Operadora": "SulAmérica", "Plano": "Mais", "Contratacao": "PME e MEI", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus"},
-    {"Operadora": "SulAmérica", "Plano": "Mais Orto", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"},
-    {"Operadora": "SulAmérica", "Plano": "Premium", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "SIM", "Equiv": "Pleno Top"},
+    # ================= MAPEAMENTO DAS OPERADORAS CONCORRENTES =================
+    # --- ODONTOPREV ---
+    {"Operadora": "OdontoPrev", "Plano": "Dental Júnior", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "OdontoPrev", "Plano": "Bem-Estar", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "OdontoPrev", "Plano": "Bem-Estar Orto", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
+    {"Operadora": "OdontoPrev", "Plano": "Integral", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "OdontoPrev", "Plano": "Master", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "SIM", "Equiv": "Pleno Ortodontia"},
+    {"Operadora": "OdontoPrev", "Plano": "Convencional", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "OdontoPrev", "Plano": "Integral Doc", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
+    {"Operadora": "OdontoPrev", "Plano": "Premium", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
+    {"Operadora": "OdontoPrev", "Plano": "Superior", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Plus"},
 
-    # --- AMIL DENTAL (Ref: Página 3) ---
-    {"Operadora": "Amil Dental", "Plano": "Dental 205", "Contratacao": "Individual", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "Amil Dental", "Plano": "Ortodontia E80", "Contratacao": "Individual", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"},
-    {"Operadora": "Amil Dental", "Plano": "Dental 205", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "Amil Dental", "Plano": "Orto + Prótese E170", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno Top"},
+    # --- HAPVIDA ODONTO ---
+    {"Operadora": "Hapvida Odonto", "Plano": "Smart Odonto", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "Hapvida Odonto", "Plano": "Top Premium DO", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
+    {"Operadora": "Hapvida Odonto", "Plano": "Top Premium Orto", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
+    {"Operadora": "Hapvida Odonto", "Plano": "Odonto Premium Free", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
 
-    # --- METLIFE (Ref: Página 4) ---
-    {"Operadora": "MetLife", "Plano": "MetLife Essencial", "Contratacao": "Individual", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "MetLife", "Plano": "MetLife Doc", "Contratacao": "Individual", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"},
-    {"Operadora": "MetLife", "Plano": "Gold Doc", "Contratacao": "PME e MEI", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"},
-    {"Operadora": "MetLife", "Plano": "Premium", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "SIM", "Clar": "SIM", "Reemb": "SIM", "Equiv": "Pleno Top"},
+    # --- PORTO SEGURO ---
+    {"Operadora": "Porto Seguro", "Plano": "Bronze 10", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "Porto Seguro", "Plano": "Bronze Integral Doc 10", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
+    {"Operadora": "Porto Seguro", "Plano": "Ouro Premium 10", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
 
-    # --- DENTAL UNI (Ref: Página 4) ---
-    {"Operadora": "Dental Uni", "Plano": "Essencial", "Contratacao": "Individual", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "Dental Uni", "Plano": "Dental Amplo DOC", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"},
+    # --- SULAMÉRICA ---
+    {"Operadora": "SulAmérica", "Plano": "Mais", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
+    {"Operadora": "SulAmérica", "Plano": "Mais Doc", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
+    {"Operadora": "SulAmérica", "Plano": "Mais", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
+    {"Operadora": "SulAmérica", "Plano": "Mais Orto", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
+    {"Operadora": "SulAmérica", "Plano": "Premium", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
 
-    # --- INPAO (Ref: Página 4 e 5) ---
-    {"Operadora": "INPAO Dental", "Plano": "Especial", "Contratacao": "PME e MEI", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "INPAO Dental", "Plano": "Especial Orto", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"},
+    # --- AMIL DENTAL ---
+    {"Operadora": "Amil Dental", "Plano": "Dental 205", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "Amil Dental", "Plano": "Ortodontia E80", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
+    {"Operadora": "Amil Dental", "Plano": "Dental 205", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "Amil Dental", "Plano": "Orto + Prótese E170", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
 
-    # --- ODONTO EMPRESAS (Ref: Página 5) ---
-    {"Operadora": "Odonto Empresas", "Plano": "Sigma", "Contratacao": "Individual", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "Odonto Empresas", "Plano": "Alfa Orto", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "SIM", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Pleno"},
+    # --- METLIFE ---
+    {"Operadora": "MetLife", "Plano": "MetLife Essencial", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "MetLife", "Plano": "MetLife Doc", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
+    {"Operadora": "MetLife", "Plano": "Gold Doc", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
+    {"Operadora": "MetLife", "Plano": "Premium", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
 
-    # --- BB DENTAL (Ref: Página 5) ---
-    {"Operadora": "BB Dental", "Plano": "Dental Essência", "Contratacao": "Individual", "Rol": "SIM", "Doc": "NÃO", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial"},
-    {"Operadora": "BB Dental", "Plano": "Integral Doc", "Contratacao": "Empresarial", "Rol": "SIM", "Doc": "SIM", "Manut": "NÃO", "Prot": "NÃO", "Clar": "NÃO", "Reemb": "NÃO", "Equiv": "Essencial Plus Doc"}
+    # --- DENTAL UNI ---
+    {"Operadora": "Dental Uni", "Plano": "Essencial", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "Dental Uni", "Plano": "Dental Amplo DOC", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
+
+    # --- INPAO ---
+    {"Operadora": "INPAO Dental", "Plano": "Especial", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "INPAO Dental", "Plano": "Especial Orto", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
+
+    # --- ODONTO EMPRESAS ---
+    {"Operadora": "Odonto Empresas", "Plano": "Sigma", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "Odonto Empresas", "Plano": "Alfa Orto", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
+
+    # --- BB DENTAL ---
+    {"Operadora": "BB Dental", "Plano": "Dental Essência", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "BB Dental", "Plano": "Integral Doc", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"}
 ]
 
 df_base = pd.DataFrame(dados_planos)
-coberturas = ["Rol", "Doc", "Manut", "Prot", "Clar", "Reemb"]
-nomes_cobs = {"Rol": "Rol ANS Clínico", "Doc": "Documentação Ortodôntica", "Manut": "Manutenção de Aparelho", "Prot": "Próteses Além do Rol", "Clar": "Clareamento Estético", "Reemb": "Reembolso"}
+
+# === CORREÇÃO DO ERRO 2: MAPEAMENTO DE 10 COBERTURAS EXATAS PEDIDAS PELO USUÁRIO ===
+coberturas = [
+    "Rol_ANS", "Rol_Amp", "Doc_Orto", "Comp_Prot", "Orto_Comp", 
+    "Prot_Comp", "Clar_Cas", "Clar_Las", "Alinhador", "Implantes"
+]
+nomes_cobs = {
+    "Rol_ANS": "Rol ANS",
+    "Rol_Amp": "Rol Ampliado",
+    "Doc_Orto": "Documentação Ortodôntica",
+    "Comp_Prot": "Complementares de Prótese",
+    "Orto_Comp": "Ortodontia Completa",
+    "Prot_Comp": "Prótese Completa",
+    "Clar_Cas": "Clareamento Caseiro",
+    "Clar_Las": "Clareamento Laser",
+    "Alinhador": "Alinhador",
+    "Implantes": "Implantes"
+}
 
 # === UI: CABEÇALHO ===
 st.markdown(f"""
@@ -208,7 +243,7 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# === FILTROS COM LEGENDAS CORRIGIDAS ===
+# === FILTROS ===
 col1, col2, col3 = st.columns(3)
 with col1:
     st.markdown('<p style="color: #2D3748 !important; font-weight: 600; font-size: 14px; margin-bottom: 5px; font-family: \'Inter\', sans-serif;">🎯 1. Escolha a Operadora Concorrente:</p>', unsafe_allow_html=True)
@@ -227,7 +262,9 @@ with col3:
 if plano_sel:
     linha_cong = df_base[(df_base["Operadora"] == op_sel) & (df_base["Contratacao"] == mod_sel) & (df_base["Plano"] == plano_sel)].iloc[0]
     equiv_uni = linha_cong["Equiv"]
-    linha_uni = df_base[(df_base["Operadora"] == "Unimed ODONTO") & (df_base["Plano"] == equiv_uni)].iloc[0]
+    
+    # Busca a linha correspondente ao plano da Unimed Odonto respeitando estritamente a categoria de contratação
+    linha_uni = df_base[(df_base["Operadora"] == "Unimed ODONTO") & (df_base["Contratacao"] == mod_sel) & (df_base["Plano"] == equiv_uni)].iloc[0]
 
     iguais, faltas, diferenciais = 0, [], []
     for c in coberturas:
@@ -238,7 +275,7 @@ if plano_sel:
         elif linha_cong[c] == "SIM" and linha_uni[c] == "NÃO": 
             diferenciais.append(nomes_cobs[c])
     
-    porcentagem = (iguais / 6) * 100
+    porcentagem = (iguais / 10) * 100
     cor_perc = "#00995D" if porcentagem == 100 else ("#A2C027" if porcentagem >= 70 else "#E05353")
 
     # Módulo de Indicadores
@@ -282,14 +319,14 @@ if plano_sel:
 <div style="color: #FFFFFF !important; font-weight: 700; margin-top: 0; margin-bottom: 12px; font-size: 22px !important; line-height: 1.2; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif;">
 <span>🦷</span> <span style="color: #FFFFFF !important;">Unimed ODONTO — {equiv_uni}</span>
 </div>
-<p style="color: #E0F2F1 !important; font-size: 14px; margin-bottom: 20px; opacity:0.9; font-family: 'Inter', sans-serif;">Par Ideal de Prateleira Mapeado</p>
+<p style="color: #E0F2F1 !important; font-size: 14px; margin-bottom: 20px; opacity:0.9; font-family: 'Inter', sans-serif;">Par Ideal Mapeado em {mod_sel}</p>
 <hr style="border:0; border-top:1px solid rgba(255,255,255,0.2); margin-bottom:15px;">
 {uni_html}
 </div>
 """
         st.markdown(html_card_uni, unsafe_allow_html=True)
 
-    # === REPROJETADO E SEGURO: INTERATIVO CLIQUE-PARA-EXPANDIR COM SUB-CARDS EXECUTIVOS ===
+    # Relatório de Gaps Ocultável
     html_insights = f"""
 <details style="background-color: #FFFFFF !important; border-left: 8px solid #00995D !important; padding: 25px !important; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); margin-top:10px; cursor: pointer;">
 <summary style="background: linear-gradient(135deg, #00995D 0%, #004D26 100%) !important; color: #FFFFFF !important; margin-top:0; font-size: 16px !important; font-weight: 700 !important; font-family: 'Inter', sans-serif; display: inline-flex; align-items: center; gap: 10px; padding: 10px 22px; border-radius: 30px; box-shadow: 0 4px 12px rgba(0,153,93,0.15); outline: none; transition: transform 0.2s;">
@@ -298,7 +335,7 @@ if plano_sel:
 <div style="margin-top: 25px; cursor: default;">
 <div style="background-color: #F4FDFB !important; border: 1px solid #E6F4EA !important; border-left: 5px solid #00995D !important; padding: 20px !important; border-radius: 10px !important; margin-bottom: 18px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.01) !important;">
 <div style="color: #00995D !important; font-weight: 700 !important; font-size: 15px !important; font-family: 'Inter', sans-serif; margin-bottom: 8px !important; text-transform: uppercase; letter-spacing: 0.5px;">Onde a Concorrência perde (Falta no Concorrente):</div>
-<div style="color: #2D3748 !important; font-weight: 600 !important; font-size: 16px !important; font-family: 'Inter', sans-serif; padding-left: 5px;">{", ".join(faltas) if faltas else "Plano Concorrente cobre todos os itens básicos mapeados."}</div>
+<div style="color: #2D3748 !important; font-weight: 600 !important; font-size: 16px !important; font-family: 'Inter', sans-serif; padding-left: 5px;">{", ".join(faltas) if faltas else "Plano Concorrente cobre todos os itens mapeados."}</div>
 </div>
 <div style="background-color: #FFF5F5 !important; border: 1px solid #FED7D7 !important; border-left: 5px solid #C5221F !important; padding: 20px !important; border-radius: 10px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.01) !important;">
 <div style="color: #C5221F !important; font-weight: 700 !important; font-size: 15px !important; font-family: 'Inter', sans-serif; margin-bottom: 8px !important; text-transform: uppercase; letter-spacing: 0.5px;">Diferencial de Cobertura Extra da Concorrência:</div>
@@ -309,10 +346,10 @@ if plano_sel:
 """
     st.markdown(html_insights, unsafe_allow_html=True)
 
-# === NOVO: RODAPÉ CORPORATIVO COM A MARCA DA OPERADORA ===
+# === RODAPÉ CORPORATIVO ===
 st.markdown(f"""
     <div style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #E2E8F0; text-align: center; font-family: 'Inter', sans-serif;">
         <img src="{logo_unimed_html}" style="max-height: 40px; width: auto; object-fit: contain; margin-bottom: 10px; opacity: 0.85;">
-        <p style="color: #A0AEC0 !important; font-size: 12px; margin: 0; font-weight: 500;">Unimed Odonto © {pd.Timestamp.now().year} — Inteligência de Vendas e Mercado</p>
+        <p style="color: #A0AEC0 !important; font-size: 12px; margin: 0; font-weight: 500;">Unimed Odonto © 2026 — Inteligência de Vendas e Mercado</p>
     </div>
 """, unsafe_allow_html=True)
