@@ -3,105 +3,13 @@ import pandas as pd
 import base64
 import os
 
-# Configuração inicial avançada do Site
+# Configuração inicial da página
 st.set_page_config(
     page_title="Equiparação Corporativa - Unimed Odonto",
     page_icon="🦷",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
-
-# === DESIGN SYSTEM PREMIUM (FONTES, GRADIENTES E BLINDAGEM DE SITE) ===
-st.markdown("""
-    <style>
-        /* Importação da fonte executiva Inter */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        
-        .stApp {
-            background-color: #F8F9FA !important;
-            font-family: 'Inter', -apple-system, sans-serif !important;
-        }
-
-        /* 🔒 BLINDAGEM DE SITE: Oculta barras, menus e rodapés nativos de aplicativo */
-        [data-testid="stHeader"] {
-            display: none !important;
-        }
-        footer {
-            visibility: hidden !important;
-            display: none !important;
-        }
-        #MainMenu {
-            visibility: hidden !important;
-            display: none !important;
-        }
-
-        /* Títulos dos filtros superiores */
-        div[data-testid="stWidgetLabel"] p {
-            color: #2D3748 !important;
-            font-weight: 600 !important;
-            font-size: 14px !important;
-        }
-
-        /* BANNER PRINCIPAL DO SITE */
-        .unimed-banner-blindado {
-            background-color: #00995D !important;
-            padding: 30px !important;
-            border-radius: 15px !important;
-            margin-bottom: 25px !important;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.12) !important;
-            color: white !important;
-        }
-
-        /* CARDS DE MÉTRICAS */
-        .metric-card-blindado {
-            background-color: #00995D !important;
-            padding: 20px !important;
-            border-radius: 12px !important;
-            text-align: center !important;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
-            color: white !important;
-        }
-        .metric-label-blindado {
-            color: #E0F2F1 !important;
-            font-size: 13px !important;
-            font-weight: 600 !important;
-            text-transform: uppercase !important;
-            letter-spacing: 1px !important;
-        }
-        .metric-value-blindado {
-            font-size: 28px !important;
-            font-weight: 700 !important;
-            margin-top: 5px !important;
-            color: white !important;
-        }
-
-        /* CARDS COMPARATIVOS */
-        .comp-card-blindado {
-            background-color: #00995D !important;
-            padding: 25px !important;
-            border-radius: 15px !important;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.1) !important;
-            margin-bottom: 20px !important;
-            min-height: 480px !important;
-            color: white !important;
-            border: 1px solid #007A4B !important;
-        }
-        
-        .coverage-item-blindado {
-            padding: 12px 0 !important;
-            border-bottom: 1px solid rgba(255,255,255,0.2) !important;
-            color: white !important;
-            font-size: 15px !important;
-            display: flex !important;
-            justify-content: space-between !important;
-            align-items: center !important;
-        }
-
-        /* Badges customizados */
-        .badge-sim-verde { background-color: #FFFFFF !important; color: #00995D !important; padding: 4px 12px !important; border-radius: 20px !important; font-weight: 700 !important; font-size: 12px !important; }
-        .badge-nao-verde { background-color: #FFCDD2 !important; color: #B71C1C !important; padding: 4px 12px !important; border-radius: 20px !important; font-weight: 700 !important; font-size: 12px !important; }
-    </style>
-""", unsafe_allow_html=True)
 
 # === FUNÇÃO: CONVERSÃO DA LOGO PARA BASE64 ===
 def obter_logo_base64(caminho_imagem):
@@ -111,6 +19,75 @@ def obter_logo_base64(caminho_imagem):
     return "https://img.icons8.com/color/tooth.png"
 
 logo_unimed_html = obter_logo_base64("foto.png")
+
+# === DESIGN SYSTEM: FUNDO GLOBAL CLARO/NEUTRO E CARDS VERDES ===
+st.markdown(f"""
+    <style>
+        /* Fundo global de toda a plataforma (Claro e Neutro) */
+        .stApp {{
+            background-color: #F8F9FA !important;
+        }}
+
+        /* BANNER PRINCIPAL - Verde Unimed */
+        .unimed-banner-blindado {{
+            background-color: #00995D !important;
+            padding: 30px !important;
+            border-radius: 15px !important;
+            margin-bottom: 25px !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12) !important;
+            color: white !important;
+        }}
+
+        /* CARDS DE MÉTRICAS - Fundo Verde Unimed e Texto Branco */
+        .metric-card-blindado {{
+            background-color: #00995D !important;
+            padding: 20px !important;
+            border-radius: 12px !important;
+            text-align: center !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+            color: white !important;
+        }}
+        .metric-label-blindado {{
+            color: #E0F2F1 !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1px !important;
+        }}
+        .metric-value-blindado {{
+            font-size: 28px !important;
+            font-weight: 700 !important;
+            margin-top: 5px !important;
+            color: white !important;
+        }}
+
+        /* CARDS COMPARATIVOS - Fundo Verde Unimed */
+        .comp-card-blindado {{
+            background-color: #00995D !important;
+            padding: 25px !important;
+            border-radius: 15px !important;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1) !important;
+            margin-bottom: 20px !important;
+            min-height: 480px !important;
+            color: white !important;
+            border: 1px solid #007A4B !important;
+        }}
+        
+        .coverage-item-blindado {{
+            padding: 12px 0 !important;
+            border-bottom: 1px solid rgba(255,255,255,0.2) !important;
+            color: white !important;
+            font-size: 15px !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+        }}
+
+        /* Badges customizados para fundo verde */
+        .badge-sim-verde {{ background-color: #FFFFFF !important; color: #00995D !important; padding: 4px 12px !important; border-radius: 20px !important; font-weight: 700 !important; font-size: 12px !important; }}
+        .badge-nao-verde {{ background-color: #FFCDD2 !important; color: #B71C1C !important; padding: 4px 12px !important; border-radius: 20px !important; font-weight: 700 !important; font-size: 12px !important; }}
+    </style>
+""", unsafe_allow_html=True)
 
 # === BANCO DE DADOS ATUALIZADO (RADAR DE MERCADO) ===
 dados_planos = [
@@ -194,7 +171,7 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# === FILTROS ===
+# === FILTROS COM LEGENDAS CORRIGIDAS ===
 col1, col2, col3 = st.columns(3)
 with col1:
     st.markdown('<p style="color: #2D3748 !important; font-weight: 600; font-size: 14px; margin-bottom: 5px; font-family: \'Inter\', sans-serif;">🎯 1. Escolha a Operadora Concorrente:</p>', unsafe_allow_html=True)
@@ -228,7 +205,7 @@ if plano_sel:
     cor_perc = "#00995D" if porcentagem == 100 else ("#A2C027" if porcentagem >= 70 else "#E05353")
 
     # Módulo de Indicadores
-    st.markdown('<div style="color: #004D26 !important; font-weight: 700; margin: 25px 0 15px 0; font-size: 20px; font-family: \'Inter\', sans-serif;">📈 Indicadores de Aderência</div>', unsafe_allow_html=True)
+    st.markdown("<h3 class='section-header-fixo'>### 📈 Indicadores de Aderência</h3>", unsafe_allow_html=True)
     m_col1, m_col2, m_col3 = st.columns(3)
     
     with m_col1:
@@ -275,19 +252,21 @@ if plano_sel:
 """
         st.markdown(html_card_uni, unsafe_allow_html=True)
 
-    # Relatório de Gaps
+    # === REPROJETADO E ESTRUTURADO: ARGUMENTOS COMERCIAIS PREMIUM (ESTILO APRESENTAÇÃO EXECUTIVA) ===
     html_insights = f"""
-<div style="background-color: #FFFFFF !important; border-left: 8px solid #00995D !important; padding: 25px !important; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); margin-top:10px;">
-<div style="background-color: #E6F4EA !important; color: #004D26 !important; margin-top:0; font-size: 18px !important; font-weight: 700 !important; font-family: 'Inter', sans-serif; margin-bottom: 20px !important; display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,153,93,0.06);">
+<div style="background-color: #FFFFFF !important; border-left: 8px solid #00995D !important; padding: 30px !important; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); margin-top: 20px;">
+<div style="background: linear-gradient(135deg, #00995D 0%, #004D26 100%) !important; color: #FFFFFF !important; margin-top:0; font-size: 18px !important; font-weight: 700 !important; font-family: 'Inter', sans-serif; margin-bottom: 25px !important; display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; border-radius: 30px; box-shadow: 0 4px 12px rgba(0,153,93,0.15);">
 <span>💡</span> Argumentos Comerciais de Abordagem Técnica
 </div>
-<div style="margin: 14px 0 !important; font-size:15px !important; font-family: 'Inter', sans-serif;">
-<span style="color: #00995D !important; font-weight: 700 !important;">Onde a Concorrência perde (Falta no Concorrente):</span><br>
-<span style="color: #B71C1C !important; font-weight: 700 !important; display: inline-block; margin-top: 4px; font-size: 16px !important;">{", ".join(faltas) if faltas else "Plano Concorrente cobre todos os itens básicos mapeados."}</span>
+
+<div style="background-color: #F4FDFB !important; border: 1px solid #E6F4EA !important; border-left: 5px solid #00995D !important; padding: 20px !important; border-radius: 10px !important; margin-bottom: 18px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.01) !important;">
+<div style="color: #00995D !important; font-weight: 700 !important; font-size: 15px !important; font-family: 'Inter', sans-serif; margin-bottom: 8px !important; text-transform: uppercase; letter-spacing: 0.5px;">Onde a Concorrência perde (Falta no Concorrente):</div>
+<div style="color: #2D3748 !important; font-weight: 600 !important; font-size: 16px !important; font-family: 'Inter', sans-serif; padding-left: 5px;">{", ".join(faltas) if faltas else "Plano Concorrente cobre todos os itens básicos mapeados."}</div>
 </div>
-<div style="margin: 14px 0 !important; font-size:15px !important; font-family: 'Inter', sans-serif;">
-<span style="color: #C5221F !important; font-weight: 700 !important;">Diferencial de Cobertura Extra da Concorrência:</span><br>
-<span style="color: #00796B !important; font-weight: 700 !important; display: inline-block; margin-top: 4px; font-size: 16px !important;">{", ".join(diferenciais) if diferenciais else "Nenhum extra detectado em relação à prateleira Unimed."}</span>
+
+<div style="background-color: #FFF5F5 !important; border: 1px solid #FED7D7 !important; border-left: 5px solid #C5221F !important; padding: 20px !important; border-radius: 10px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.01) !important;">
+<div style="color: #C5221F !important; font-weight: 700 !important; font-size: 15px !important; font-family: 'Inter', sans-serif; margin-bottom: 8px !important; text-transform: uppercase; letter-spacing: 0.5px;">Diferencial de Cobertura Extra da Concorrência:</div>
+<div style="color: #2D3748 !important; font-weight: 600 !important; font-size: 16px !important; font-family: 'Inter', sans-serif; padding-left: 5px;">{", ".join(diferenciais) if diferenciais else "Nenhum extra detectado em relação à prateleira Unimed."}</div>
 </div>
 </div>
 """
