@@ -125,10 +125,21 @@ st.markdown(f"""
     </style>
 """, unsafe_allow_html=True)
 
-# === BANCO DE DADOS REESTRUTURADO ===
+# === BANCO DE DADOS: PANORAMA DE MERCADO ===
+dados_mercado = {
+    "OdontoPrev": {"posicao": "1ª", "vidas": "8,78 milhões", "perfil": "Líder absoluta do mercado. Capital aberto na B3 (ODPV3), possui a maior rede credenciada nacional e parcerias de distribuição estratégicas (como a operação conjunta com o Bradesco Dental)."},
+    "Hapvida Odonto": {"posicao": "2ª", "vidas": "3,93 milhões", "perfil": "Vice-líder. Impulsionada pela fusão Hapvida/GNDI e pela aquisição de operadoras regionais. Possui fortíssima penetração nas regiões Norte, Nordeste e Sudeste."},
+    "SulAmérica": {"posicao": "3ª", "vidas": "2,90 milhões", "perfil": "Parte do grupo Rede D'Or (RDOR3), tem forte presença no segmento corporativo e brokerage, atendendo de PMEs a grandes contas multinacionais."},
+    "Amil Dental": {"posicao": "5ª", "vidas": "2,67 milhões", "perfil": "Uma das marcas mais tradicionais do país em odontologia suplementar, com ampla variedade de grades (do rol básico a planos com cobertura estética e de próteses)."},
+    "Porto Seguro": {"posicao": "6ª", "vidas": "1,18 milhão", "perfil": "Destaca-se pela alta retenção de clientes e sinergia com o portfólio de seguros corporativos da Porto."},
+    "MetLife": {"posicao": "8ª", "vidas": "~850 mil", "perfil": "Multinacional focada no mercado de apólices e benefícios corporativos de médio e grande porte."},
+    "Dental Uni": {"posicao": "9ª", "vidas": "~650 mil", "perfil": "Cooperativa odontológica de destaque nacional com forte presença na Região Sul."},
+    "INPAO Dental": {"posicao": "10ª", "vidas": "~450 mil", "perfil": "Atuação focada em segmentos premium corporativos, com alto padrão de atendimento e programas focados em saúde bucal preventiva."}
+}
+
+# === BANCO DE DADOS DE PLANOS ===
 dados_planos = [
     # ================= PLANOS UNIMED ODONTO =================
-    # --- EMPRESARIAL ---
     {"Operadora": "Unimed ODONTO", "Plano": "Essencial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "Unimed ODONTO", "Plano": "Essencial Plus", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
     {"Operadora": "Unimed ODONTO", "Plano": "Essencial Plus DOC", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
@@ -139,7 +150,6 @@ dados_planos = [
     {"Operadora": "Unimed ODONTO", "Plano": "Pleno Top", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
     {"Operadora": "Unimed ODONTO", "Plano": "Unimed Alinhador", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "SIM", "Implantes": "NÃO", "Equiv": "Unimed Alinhador"},
 
-    # --- PME ---
     {"Operadora": "Unimed ODONTO", "Plano": "Essencial", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "Unimed ODONTO", "Plano": "Essencial Plus", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
     {"Operadora": "Unimed ODONTO", "Plano": "Essencial Plus DOC", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
@@ -147,32 +157,24 @@ dados_planos = [
     {"Operadora": "Unimed ODONTO", "Plano": "Pleno Ortodontia", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
     {"Operadora": "Unimed ODONTO", "Plano": "Unimed Alinhador", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "SIM", "Implantes": "NÃO", "Equiv": "Unimed Alinhador"},
 
-    # --- INDIVIDUAL ---
     {"Operadora": "Unimed ODONTO", "Plano": "Essencial", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "Unimed ODONTO", "Plano": "Essencial Plus", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
     {"Operadora": "Unimed ODONTO", "Plano": "Pleno", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "SIM", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
 
-
-    # ================= MAPEAMENTO AMIL DENTAL (NOVO) =================
-    # --- INDIVIDUAL ---
+    # ================= AMIL DENTAL =================
     {"Operadora": "Amil Dental", "Plano": "Amil Dental 205", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E30", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E40", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E50", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
-    
-    # --- PME ---
     {"Operadora": "Amil Dental", "Plano": "Amil Dental 205 PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E30 PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E40 PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E50 PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
-    
-    # --- EMPRESARIAL ---
     {"Operadora": "Amil Dental", "Plano": "Amil Dental 205 Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E30 Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E40 Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E50 Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Plus"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E60 Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
-
 
     # ================= HAPVIDA ODONTO =================
     {"Operadora": "Hapvida Odonto", "Plano": "Odonto Premium Free", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
@@ -206,7 +208,7 @@ dados_planos = [
 
 df_base = pd.DataFrame(dados_planos)
 
-# === MAPEAMENTO EXATO DE 10 COBERTURAS CLINICAS ===
+# === MAPEAMENTO DAS 10 COBERTURAS ===
 coberturas = [
     "Rol_ANS", "Rol_Amp", "Doc_Orto", "Comp_Prot", "Orto_Comp", 
     "Prot_Comp", "Clar_Cas", "Clar_Las", "Alinhador", "Implantes"
@@ -255,7 +257,6 @@ if plano_sel:
     linha_cong = df_base[(df_base["Operadora"] == op_sel) & (df_base["Contratacao"] == mod_sel) & (df_base["Plano"] == plano_sel)].iloc[0]
     equiv_uni = linha_cong["Equiv"]
     
-    # Busca a linha correspondente ao plano Unimed na mesma modalidade de contratação
     linha_uni = df_base[(df_base["Operadora"] == "Unimed ODONTO") & (df_base["Contratacao"] == mod_sel) & (df_base["Plano"] == equiv_uni)].iloc[0]
 
     iguais, faltas, diferenciais = 0, [], []
@@ -318,25 +319,62 @@ if plano_sel:
 """
         st.markdown(html_card_uni, unsafe_allow_html=True)
 
-    # Relatório de Gaps Ocultável (Clique-para-expandir)
-    html_insights = f"""
-<details style="background-color: #FFFFFF !important; border-left: 8px solid #00995D !important; padding: 25px !important; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); margin-top:10px; cursor: pointer;">
-<summary style="background: linear-gradient(135deg, #00995D 0%, #004D26 100%) !important; color: #FFFFFF !important; margin-top:0; font-size: 16px !important; font-weight: 700 !important; font-family: 'Inter', sans-serif; display: inline-flex; align-items: center; gap: 10px; padding: 10px 22px; border-radius: 30px; box-shadow: 0 4px 12px rgba(0,153,93,0.15); outline: none; transition: transform 0.2s;">
-<span>💡</span> Argumentos Comerciais de Abordagem Técnica &nbsp; <small style="font-size:11px; font-weight:400; color:#E0F2F1;">(Clique para consultar)</small>
-</summary>
-<div style="margin-top: 25px; cursor: default;">
-<div style="background-color: #F4FDFB !important; border: 1px solid #E6F4EA !important; border-left: 5px solid #00995D !important; padding: 20px !important; border-radius: 10px !important; margin-bottom: 18px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.01) !important;">
-<div style="color: #00995D !important; font-weight: 700 !important; font-size: 15px !important; font-family: 'Inter', sans-serif; margin-bottom: 8px !important; text-transform: uppercase; letter-spacing: 0.5px;">Onde a Concorrência perde (Falta no Concorrente):</div>
-<div style="color: #2D3748 !important; font-weight: 600 !important; font-size: 16px !important; font-family: 'Inter', sans-serif; padding-left: 5px;">{", ".join(faltas) if faltas else "Plano Concorrente cobre todos os itens mapeados."}</div>
-</div>
-<div style="background-color: #FFF5F5 !important; border: 1px solid #FED7D7 !important; border-left: 5px solid #C5221F !important; padding: 20px !important; border-radius: 10px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.01) !important;">
-<div style="color: #C5221F !important; font-weight: 700 !important; font-size: 15px !important; font-family: 'Inter', sans-serif; margin-bottom: 8px !important; text-transform: uppercase; letter-spacing: 0.5px;">Diferencial de Cobertura Extra da Concorrência:</div>
-<div style="color: #2D3748 !important; font-weight: 600 !important; font-size: 16px !important; font-family: 'Inter', sans-serif; padding-left: 5px;">{", ".join(diferenciais) if diferenciais else "Nenhum extra detectado em relação à prateleira Unimed."}</div>
-</div>
-</div>
-</details>
-"""
-    st.markdown(html_insights, unsafe_allow_html=True)
+    # === SEÇÃO INFERIOR DIVIDIDA: ARGUMENTOS COMERCIAIS E PANORAMA DE MERCADO ===
+    col_bottom1, col_bottom2 = st.columns(2)
+    
+    with col_bottom1:
+        html_insights = f"""
+        <details style="background-color: #FFFFFF !important; border-left: 8px solid #00995D !important; padding: 25px !important; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); margin-top:10px; cursor: pointer; height: 100%;">
+        <summary style="background: linear-gradient(135deg, #00995D 0%, #004D26 100%) !important; color: #FFFFFF !important; margin-top:0; font-size: 16px !important; font-weight: 700 !important; font-family: 'Inter', sans-serif; display: inline-flex; align-items: center; gap: 10px; padding: 10px 22px; border-radius: 30px; box-shadow: 0 4px 12px rgba(0,153,93,0.15); outline: none; transition: transform 0.2s;">
+        <span>💡</span> Argumentos Comerciais de Abordagem Técnica &nbsp; <small style="font-size:11px; font-weight:400; color:#E0F2F1;">(Clique para consultar)</small>
+        </summary>
+        <div style="margin-top: 25px; cursor: default;">
+        <div style="background-color: #F4FDFB !important; border: 1px solid #E6F4EA !important; border-left: 5px solid #00995D !important; padding: 20px !important; border-radius: 10px !important; margin-bottom: 18px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.01) !important;">
+        <div style="color: #00995D !important; font-weight: 700 !important; font-size: 15px !important; font-family: 'Inter', sans-serif; margin-bottom: 8px !important; text-transform: uppercase; letter-spacing: 0.5px;">Onde a Concorrência perde (Falta no Concorrente):</div>
+        <div style="color: #2D3748 !important; font-weight: 600 !important; font-size: 16px !important; font-family: 'Inter', sans-serif; padding-left: 5px;">{", ".join(faltas) if faltas else "Plano Concorrente cobre todos os itens mapeados."}</div>
+        </div>
+        <div style="background-color: #FFF5F5 !important; border: 1px solid #FED7D7 !important; border-left: 5px solid #C5221F !important; padding: 20px !important; border-radius: 10px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.01) !important;">
+        <div style="color: #C5221F !important; font-weight: 700 !important; font-size: 15px !important; font-family: 'Inter', sans-serif; margin-bottom: 8px !important; text-transform: uppercase; letter-spacing: 0.5px;">Diferencial de Cobertura Extra da Concorrência:</div>
+        <div style="color: #2D3748 !important; font-weight: 600 !important; font-size: 16px !important; font-family: 'Inter', sans-serif; padding-left: 5px;">{", ".join(diferenciais) if diferenciais else "Nenhum extra detectado em relação à prateleira Unimed."}</div>
+        </div>
+        </div>
+        </details>
+        """
+        st.markdown(html_insights, unsafe_allow_html=True)
+        
+    with col_bottom2:
+        if op_sel in dados_mercado:
+            info = dados_mercado[op_sel]
+            content = f"""
+            <div style="background-color: #F8F9FA !important; border: 1px solid #E2E8F0 !important; border-left: 5px solid #2D3748 !important; padding: 15px !important; border-radius: 10px !important; margin-bottom: 12px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.01) !important;">
+                <div style="color: #2D3748 !important; font-weight: 700 !important; font-size: 13px !important; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.5px;">Posição no Ranking: <span style="font-weight: 400;">{info['posicao']}</span></div>
+            </div>
+            <div style="background-color: #F8F9FA !important; border: 1px solid #E2E8F0 !important; border-left: 5px solid #2D3748 !important; padding: 15px !important; border-radius: 10px !important; margin-bottom: 12px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.01) !important;">
+                <div style="color: #2D3748 !important; font-weight: 700 !important; font-size: 13px !important; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.5px;">Beneficiários (Vidas): <span style="font-weight: 400;">{info['vidas']}</span></div>
+            </div>
+            <div style="background-color: #F8F9FA !important; border: 1px solid #E2E8F0 !important; border-left: 5px solid #2D3748 !important; padding: 15px !important; border-radius: 10px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.01) !important;">
+                <div style="color: #2D3748 !important; font-weight: 700 !important; font-size: 13px !important; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px;">Perfil & Modelo de Atuação:</div>
+                <div style="color: #4A5568 !important; font-weight: 400 !important; font-size: 14px !important; font-family: 'Inter', sans-serif; line-height: 1.5;">{info['perfil']}</div>
+            </div>
+            """
+        else:
+            content = """
+            <div style="background-color: #FFF5F5 !important; border: 1px solid #FED7D7 !important; border-left: 5px solid #C5221F !important; padding: 20px !important; border-radius: 10px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.01) !important; text-align: center;">
+                <div style="color: #C5221F !important; font-weight: 700 !important; font-size: 15px !important; font-family: 'Inter', sans-serif;">Seguradora não se encontra no ranking</div>
+            </div>
+            """
+
+        html_panorama = f"""
+        <details style="background-color: #FFFFFF !important; border-left: 8px solid #2D3748 !important; padding: 25px !important; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); margin-top:10px; cursor: pointer; height: 100%;">
+        <summary style="background: linear-gradient(135deg, #4A5568 0%, #2D3748 100%) !important; color: #FFFFFF !important; margin-top:0; font-size: 16px !important; font-weight: 700 !important; font-family: 'Inter', sans-serif; display: inline-flex; align-items: center; gap: 10px; padding: 10px 22px; border-radius: 30px; box-shadow: 0 4px 12px rgba(45,55,72,0.15); outline: none; transition: transform 0.2s;">
+        <span>📊</span> Panorama de Mercado &nbsp; <small style="font-size:11px; font-weight:400; color:#E2E8F0;">(Clique para consultar)</small>
+        </summary>
+        <div style="margin-top: 25px; cursor: default;">
+        {content}
+        </div>
+        </details>
+        """
+        st.markdown(html_panorama, unsafe_allow_html=True)
 
 # === RODAPÉ CORPORATIVO COM A MARCA ===
 st.markdown(f"""
