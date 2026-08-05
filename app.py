@@ -115,15 +115,30 @@ st.markdown(f"""
             display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; 
             border-radius: 30px; outline: none; cursor: pointer; transition: all 0.3s ease;
         }}
-        .interactive-btn:hover {{ transform: translateY(-3px); }}
+        .interactive-btn:hover {{
+            transform: translateY(-3px);
+        }}
         
-        .btn-green {{ background: linear-gradient(135deg, #00995D 0%, #004D26 100%) !important; color: #FFFFFF !important; box-shadow: 0 4px 12px rgba(0,153,93,0.2); }}
-        .btn-green:hover {{ box-shadow: 0 8px 18px rgba(0,153,93,0.35); }}
+        .btn-green {{
+            background: linear-gradient(135deg, #00995D 0%, #004D26 100%) !important; color: #FFFFFF !important;
+            box-shadow: 0 4px 12px rgba(0,153,93,0.2);
+        }}
+        .btn-green:hover {{
+            box-shadow: 0 8px 18px rgba(0,153,93,0.35);
+        }}
         
-        .btn-dark {{ background: linear-gradient(135deg, #4A5568 0%, #2D3748 100%) !important; color: #FFFFFF !important; box-shadow: 0 4px 12px rgba(45,55,72,0.2); }}
-        .btn-dark:hover {{ box-shadow: 0 8px 18px rgba(45,55,72,0.35); }}
+        .btn-dark {{
+            background: linear-gradient(135deg, #4A5568 0%, #2D3748 100%) !important; color: #FFFFFF !important;
+            box-shadow: 0 4px 12px rgba(45,55,72,0.2);
+        }}
+        .btn-dark:hover {{
+            box-shadow: 0 8px 18px rgba(45,55,72,0.35);
+        }}
 
-        .details-container {{ background-color: #FFFFFF !important; padding: 25px !important; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); margin-top:10px; height: 100%; }}
+        .details-container {{
+            background-color: #FFFFFF !important; padding: 25px !important; border-radius: 16px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04); margin-top:10px; height: 100%;
+        }}
     </style>
 """, unsafe_allow_html=True)
 
@@ -139,7 +154,7 @@ dados_mercado = {
     "INPAO Dental": {"posicao": "10ª", "vidas": "~450 mil", "perfil": "Atuação focada em segmentos premium corporativos, com alto padrão de atendimento e programas focados em saúde bucal preventiva."}
 }
 
-# === BANCO DE DADOS MASTER DE PLANOS (TODAS AS OPERADORAS INTEGRADAS) ===
+# === BANCO DE DADOS DE PLANOS (COMPLETO) ===
 dados_planos = [
     # --- UNIMED ODONTO ---
     {"Operadora": "Unimed ODONTO", "Plano": "Essencial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
@@ -168,10 +183,12 @@ dados_planos = [
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E30", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E40", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E50", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
+    
     {"Operadora": "Amil Dental", "Plano": "Amil Dental 205 PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E30 PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E40 PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E50 PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
+    
     {"Operadora": "Amil Dental", "Plano": "Amil Dental 205 Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E30 Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E40 Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
@@ -214,9 +231,11 @@ dados_planos = [
     {"Operadora": "MetLife", "Plano": "MetLife Sorria Mais Ortodôntico", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
     {"Operadora": "MetLife", "Plano": "MetLife Sorria Mais Total", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
     {"Operadora": "MetLife", "Plano": "MetLife Sorria Mais Total Estético", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "SIM", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
+    
     {"Operadora": "MetLife", "Plano": "MetLife Dental First PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "MetLife", "Plano": "MetLife Dental Gold PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
     {"Operadora": "MetLife", "Plano": "MetLife Dental Gold Doc PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
+    
     {"Operadora": "MetLife", "Plano": "MetLife Dental First Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "MetLife", "Plano": "MetLife Dental Gold Doc Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
     {"Operadora": "MetLife", "Plano": "MetLife Dental Special Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
@@ -390,8 +409,8 @@ if plano_sel:
 """
             st.markdown(html_panorama, unsafe_allow_html=True)
             
-    except IndexError:
-        st.warning("Atualização de dados detectada. Por favor, re-selecione a operadora no menu acima.")
+    except Exception as e:
+        st.warning("Atualização de dados detectada. Por favor, re-selecione a operadora e o plano no menu acima para limpar o cache.")
 
 # === RODAPÉ CORPORATIVO COM A MARCA ===
 st.markdown(f"""
