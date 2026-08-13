@@ -107,7 +107,6 @@ st.markdown(f"""
             margin: 25px 0 15px 0 !important;
         }}
 
-        /* === ANIMAÇÕES E CLASSES DOS BOTÕES INTERATIVOS === */
         summary {{ list-style: none !important; }}
         summary::-webkit-details-marker {{ display: none !important; }}
         
@@ -116,30 +115,15 @@ st.markdown(f"""
             display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; 
             border-radius: 30px; outline: none; cursor: pointer; transition: all 0.3s ease;
         }}
-        .interactive-btn:hover {{
-            transform: translateY(-3px);
-        }}
+        .interactive-btn:hover {{ transform: translateY(-3px); }}
         
-        .btn-green {{
-            background: linear-gradient(135deg, #00995D 0%, #004D26 100%) !important; color: #FFFFFF !important;
-            box-shadow: 0 4px 12px rgba(0,153,93,0.2);
-        }}
-        .btn-green:hover {{
-            box-shadow: 0 8px 18px rgba(0,153,93,0.35);
-        }}
+        .btn-green {{ background: linear-gradient(135deg, #00995D 0%, #004D26 100%) !important; color: #FFFFFF !important; box-shadow: 0 4px 12px rgba(0,153,93,0.2); }}
+        .btn-green:hover {{ box-shadow: 0 8px 18px rgba(0,153,93,0.35); }}
         
-        .btn-dark {{
-            background: linear-gradient(135deg, #4A5568 0%, #2D3748 100%) !important; color: #FFFFFF !important;
-            box-shadow: 0 4px 12px rgba(45,55,72,0.2);
-        }}
-        .btn-dark:hover {{
-            box-shadow: 0 8px 18px rgba(45,55,72,0.35);
-        }}
+        .btn-dark {{ background: linear-gradient(135deg, #4A5568 0%, #2D3748 100%) !important; color: #FFFFFF !important; box-shadow: 0 4px 12px rgba(45,55,72,0.2); }}
+        .btn-dark:hover {{ box-shadow: 0 8px 18px rgba(45,55,72,0.35); }}
 
-        .details-container {{
-            background-color: #FFFFFF !important; padding: 25px !important; border-radius: 16px; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04); margin-top:10px; height: 100%;
-        }}
+        .details-container {{ background-color: #FFFFFF !important; padding: 25px !important; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); margin-top:10px; height: 100%; }}
     </style>
 """, unsafe_allow_html=True)
 
@@ -155,7 +139,7 @@ dados_mercado = {
     "INPAO Dental": {"posicao": "10ª", "vidas": "~450 mil", "perfil": "Atuação focada em segmentos premium corporativos, com alto padrão de atendimento e programas focados em saúde bucal preventiva."}
 }
 
-# === BANCO DE DADOS DE PLANOS (COMPLETO) ===
+# === BANCO DE DADOS MASTER DE PLANOS (TODAS AS OPERADORAS INTEGRADAS) ===
 dados_planos = [
     # --- UNIMED ODONTO ---
     {"Operadora": "Unimed ODONTO", "Plano": "Essencial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
@@ -184,17 +168,31 @@ dados_planos = [
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E30", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E40", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E50", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
-    
     {"Operadora": "Amil Dental", "Plano": "Amil Dental 205 PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E30 PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E40 PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E50 PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
-    
     {"Operadora": "Amil Dental", "Plano": "Amil Dental 205 Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E30 Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E40 Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E50 Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Plus"},
     {"Operadora": "Amil Dental", "Plano": "Amil Dental E60 Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
+
+    # --- PORTO SEGURO ---
+    {"Operadora": "Porto Seguro", "Plano": "Porto Seguro Odonto Bronze", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "Porto Seguro", "Plano": "Porto Seguro Odonto Prata", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
+    {"Operadora": "Porto Seguro", "Plano": "Porto Seguro Odonto Ouro", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
+    {"Operadora": "Porto Seguro", "Plano": "Porto Seguro Odonto Bronze 10 PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "Porto Seguro", "Plano": "Porto Seguro Odonto Bronze Integral 10 PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
+    {"Operadora": "Porto Seguro", "Plano": "Porto Seguro Odonto Prata 10 PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
+    {"Operadora": "Porto Seguro", "Plano": "Porto Seguro Odonto Ouro 10 PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
+    {"Operadora": "Porto Seguro", "Plano": "Porto Seguro Odontox PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "Porto Seguro", "Plano": "Porto Seguro Odonto Bronze 10 Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
+    {"Operadora": "Porto Seguro", "Plano": "Porto Seguro Odonto Bronze Integral DOC 10 Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
+    {"Operadora": "Porto Seguro", "Plano": "Porto Seguro Odonto Bronze Clarear 10 Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
+    {"Operadora": "Porto Seguro", "Plano": "Porto Seguro Odonto Prata 10 Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
+    {"Operadora": "Porto Seguro", "Plano": "Porto Seguro Odonto Ouro Premium 10 Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "SIM", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
+    {"Operadora": "Porto Seguro", "Plano": "Porto Seguro Odontox Total Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
 
     # --- HAPVIDA ODONTO ---
     {"Operadora": "Hapvida Odonto", "Plano": "Odonto Premium Free", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
@@ -209,21 +207,16 @@ dados_planos = [
     {"Operadora": "Hapvida Odonto", "Plano": "Select", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "SIM", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Plus"},
     {"Operadora": "Hapvida Odonto", "Plano": "Excelence", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
 
-    # --- METLIFE (NOVO MAPEAMENTO) ---
-    # Individual
+    # --- METLIFE ---
     {"Operadora": "MetLife", "Plano": "MetLife Sorria Mais Essencial", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "MetLife", "Plano": "MetLife Sorria Mais Essencial DOC", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
     {"Operadora": "MetLife", "Plano": "MetLife Sorria Mais Estético", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
     {"Operadora": "MetLife", "Plano": "MetLife Sorria Mais Ortodôntico", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
     {"Operadora": "MetLife", "Plano": "MetLife Sorria Mais Total", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
     {"Operadora": "MetLife", "Plano": "MetLife Sorria Mais Total Estético", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "SIM", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
-
-    # PME
     {"Operadora": "MetLife", "Plano": "MetLife Dental First PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "MetLife", "Plano": "MetLife Dental Gold PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
     {"Operadora": "MetLife", "Plano": "MetLife Dental Gold Doc PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
-
-    # Empresarial
     {"Operadora": "MetLife", "Plano": "MetLife Dental First Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
     {"Operadora": "MetLife", "Plano": "MetLife Dental Gold Doc Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
     {"Operadora": "MetLife", "Plano": "MetLife Dental Special Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
@@ -235,8 +228,6 @@ dados_planos = [
     {"Operadora": "OdontoPrev", "Plano": "Master", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "SIM", "Equiv": "Pleno Ortodontia"},
     {"Operadora": "OdontoPrev", "Plano": "Integral Doc", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
     {"Operadora": "OdontoPrev", "Plano": "Premium", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
-    {"Operadora": "Porto Seguro", "Plano": "Bronze Integral Doc 10", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
-    {"Operadora": "Porto Seguro", "Plano": "Ouro Premium 10", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
     {"Operadora": "SulAmérica", "Plano": "Mais", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
     {"Operadora": "SulAmérica", "Plano": "Premium", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
     {"Operadora": "Dental Uni", "Plano": "Dental Amplo DOC", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
@@ -281,39 +272,40 @@ with col3:
     planos_filtrados = df_base[(df_base["Operadora"] == op_sel) & (df_base["Contratacao"] == mod_sel)]["Plano"].tolist()
     plano_sel = st.selectbox("plano_label", planos_filtrados, label_visibility="collapsed")
 
-# === PROCESSAMENTO ===
+# === PROCESSAMENTO (COM TRAVA DE SEGURANÇA PARA CACHE) ===
 if plano_sel:
-    linha_cong = df_base[(df_base["Operadora"] == op_sel) & (df_base["Contratacao"] == mod_sel) & (df_base["Plano"] == plano_sel)].iloc[0]
-    equiv_uni = linha_cong["Equiv"]
-    
-    linha_uni = df_base[(df_base["Operadora"] == "Unimed ODONTO") & (df_base["Contratacao"] == mod_sel) & (df_base["Plano"] == equiv_uni)].iloc[0]
+    try:
+        linha_cong = df_base[(df_base["Operadora"] == op_sel) & (df_base["Contratacao"] == mod_sel) & (df_base["Plano"] == plano_sel)].iloc[0]
+        equiv_uni = linha_cong["Equiv"]
+        
+        linha_uni = df_base[(df_base["Operadora"] == "Unimed ODONTO") & (df_base["Contratacao"] == mod_sel) & (df_base["Plano"] == equiv_uni)].iloc[0]
 
-    iguais, faltas, diferenciais = 0, [], []
-    for c in coberturas:
-        if linha_cong[c] == linha_uni[c]: iguais += 1
-        elif linha_uni[c] == "SIM" and linha_cong[c] == "NÃO": faltas.append(nomes_cobs[c])
-        elif linha_cong[c] == "SIM" and linha_uni[c] == "NÃO": diferenciais.append(nomes_cobs[c])
-    
-    porcentagem = (iguais / 10) * 100
-    cor_perc = "#00995D" if porcentagem == 100 else ("#A2C027" if porcentagem >= 70 else "#E05353")
+        iguais, faltas, diferenciais = 0, [], []
+        for c in coberturas:
+            if linha_cong[c] == linha_uni[c]: iguais += 1
+            elif linha_uni[c] == "SIM" and linha_cong[c] == "NÃO": faltas.append(nomes_cobs[c])
+            elif linha_cong[c] == "SIM" and linha_uni[c] == "NÃO": diferenciais.append(nomes_cobs[c])
+        
+        porcentagem = (iguais / 10) * 100
+        cor_perc = "#00995D" if porcentagem == 100 else ("#A2C027" if porcentagem >= 70 else "#E05353")
 
-    st.markdown("<h3 class='section-header-fixo'>### 📈 Indicadores de Aderência</h3>", unsafe_allow_html=True)
-    m_col1, m_col2, m_col3 = st.columns(3)
-    
-    with m_col1:
-        st.markdown(f'<div class="metric-card-blindado"><div class="metric-label-blindado">Percentual de Equiparação</div><div class="metric-value-blindado">{porcentagem:.1f}%</div></div>', unsafe_allow_html=True)
-    with m_col2:
-        st.markdown(f'<div class="metric-card-blindado"><div class="metric-label-blindado">Recomendação Unimed</div><div class="metric-value-blindado">{equiv_uni}</div></div>', unsafe_allow_html=True)
-    with m_col3:
-        status = "Par Perfeito" if porcentagem == 100 else ("Equivalente" if porcentagem >= 70 else "Gap Técnico")
-        st.markdown(f'<div class="metric-card-blindado"><div class="metric-label-blindado">Status Comercial</div><div class="metric-value-blindado">{status}</div></div>', unsafe_allow_html=True)
+        st.markdown("<h3 class='section-header-fixo'>### 📈 Indicadores de Aderência</h3>", unsafe_allow_html=True)
+        m_col1, m_col2, m_col3 = st.columns(3)
+        
+        with m_col1:
+            st.markdown(f'<div class="metric-card-blindado"><div class="metric-label-blindado">Percentual de Equiparação</div><div class="metric-value-blindado">{porcentagem:.1f}%</div></div>', unsafe_allow_html=True)
+        with m_col2:
+            st.markdown(f'<div class="metric-card-blindado"><div class="metric-label-blindado">Recomendação Unimed</div><div class="metric-value-blindado">{equiv_uni}</div></div>', unsafe_allow_html=True)
+        with m_col3:
+            status = "Par Perfeito" if porcentagem == 100 else ("Equivalente" if porcentagem >= 70 else "Gap Técnico")
+            st.markdown(f'<div class="metric-card-blindado"><div class="metric-label-blindado">Status Comercial</div><div class="metric-value-blindado">{status}</div></div>', unsafe_allow_html=True)
 
-    st.markdown(f'<div style="width:100%; background:rgba(0,0,0,0.08); height:10px; border-radius:10px; margin:25px 0;"><div style="width:{porcentagem}%; background:{cor_perc}; height:100%; border-radius:10px; border:1px solid rgba(255,255,255,0.4);"></div></div>', unsafe_allow_html=True)
+        st.markdown(f'<div style="width:100%; background:rgba(0,0,0,0.08); height:10px; border-radius:10px; margin:25px 0;"><div style="width:{porcentagem}%; background:{cor_perc}; height:100%; border-radius:10px; border:1px solid rgba(255,255,255,0.4);"></div></div>', unsafe_allow_html=True)
 
-    c_col1, c_col2 = st.columns(2)
-    with c_col1:
-        cobs_html = "".join([f'<div class="coverage-item-blindado">{nomes_cobs[c]} <span class="{"badge-sim-verde" if linha_cong[c]=="SIM" else "badge-nao-verde"}">{linha_cong[c]}</span></div>' for c in coberturas])
-        html_card_cong = f"""
+        c_col1, c_col2 = st.columns(2)
+        with c_col1:
+            cobs_html = "".join([f'<div class="coverage-item-blindado">{nomes_cobs[c]} <span class="{"badge-sim-verde" if linha_cong[c]=="SIM" else "badge-nao-verde"}">{linha_cong[c]}</span></div>' for c in coberturas])
+            html_card_cong = f"""
 <div class="comp-card-blindado">
 <div style="color: #FFFFFF !important; font-weight: 700; margin-top: 0; margin-bottom: 12px; font-size: 22px !important; line-height: 1.2; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif;">
 <span>🔍</span> <span style="color: #FFFFFF !important;">{op_sel} — {plano_sel}</span>
@@ -323,11 +315,11 @@ if plano_sel:
 {cobs_html}
 </div>
 """
-        st.markdown(html_card_cong, unsafe_allow_html=True)
+            st.markdown(html_card_cong, unsafe_allow_html=True)
 
-    with c_col2:
-        uni_html = "".join([f'<div class="coverage-item-blindado">{nomes_cobs[c]} <span class="{"badge-sim-verde" if linha_uni[c]=="SIM" else "badge-nao-verde"}">{linha_uni[c]}</span></div>' for c in coberturas])
-        html_card_uni = f"""
+        with c_col2:
+            uni_html = "".join([f'<div class="coverage-item-blindado">{nomes_cobs[c]} <span class="{"badge-sim-verde" if linha_uni[c]=="SIM" else "badge-nao-verde"}">{linha_uni[c]}</span></div>' for c in coberturas])
+            html_card_uni = f"""
 <div class="comp-card-blindado" style="background-color: #007A4B !important;">
 <div style="color: #FFFFFF !important; font-weight: 700; margin-top: 0; margin-bottom: 12px; font-size: 22px !important; line-height: 1.2; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif;">
 <span>🦷</span> <span style="color: #FFFFFF !important;">Unimed ODONTO — {equiv_uni}</span>
@@ -337,13 +329,13 @@ if plano_sel:
 {uni_html}
 </div>
 """
-        st.markdown(html_card_uni, unsafe_allow_html=True)
+            st.markdown(html_card_uni, unsafe_allow_html=True)
 
-    # === SEÇÃO INFERIOR: BOTÕES INTERATIVOS E CORRIGIDOS SEM RECUO ===
-    col_bottom1, col_bottom2 = st.columns(2)
-    
-    with col_bottom1:
-        html_insights = f"""
+        # === SEÇÃO INFERIOR: BOTÕES INTERATIVOS E CORRIGIDOS SEM RECUO ===
+        col_bottom1, col_bottom2 = st.columns(2)
+        
+        with col_bottom1:
+            html_insights = f"""
 <details class="details-container" style="border-left: 8px solid #00995D !important;">
 <summary class="interactive-btn btn-green">
 <div style="display: flex; align-items: center; gap: 8px;"><span>💡</span> Argumentos Comerciais de Abordagem</div>
@@ -361,12 +353,12 @@ if plano_sel:
 </div>
 </details>
 """
-        st.markdown(html_insights, unsafe_allow_html=True)
-        
-    with col_bottom2:
-        if op_sel in dados_mercado:
-            info = dados_mercado[op_sel]
-            content = f"""
+            st.markdown(html_insights, unsafe_allow_html=True)
+            
+        with col_bottom2:
+            if op_sel in dados_mercado:
+                info = dados_mercado[op_sel]
+                content = f"""
 <div style="background-color: #F8F9FA !important; border: 1px solid #E2E8F0 !important; border-left: 5px solid #2D3748 !important; padding: 15px !important; border-radius: 10px !important; margin-bottom: 12px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.01) !important;">
 <div style="color: #2D3748 !important; font-weight: 700 !important; font-size: 13px !important; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.5px;">Posição no Ranking: <span style="font-weight: 400;">{info['posicao']}</span></div>
 </div>
@@ -378,14 +370,14 @@ if plano_sel:
 <div style="color: #4A5568 !important; font-weight: 400 !important; font-size: 14px !important; font-family: 'Inter', sans-serif; line-height: 1.5;">{info['perfil']}</div>
 </div>
 """
-        else:
-            content = f"""
+            else:
+                content = f"""
 <div style="background-color: #FFF5F5 !important; border: 1px solid #FED7D7 !important; border-left: 5px solid #C5221F !important; padding: 20px !important; border-radius: 10px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.01) !important; text-align: center;">
 <div style="color: #C5221F !important; font-weight: 700 !important; font-size: 15px !important; font-family: 'Inter', sans-serif;">Seguradora não se encontra no ranking</div>
 </div>
 """
 
-        html_panorama = f"""
+            html_panorama = f"""
 <details class="details-container" style="border-left: 8px solid #2D3748 !important;">
 <summary class="interactive-btn btn-dark">
 <div style="display: flex; align-items: center; gap: 8px;"><span>📊</span> Panorama de Mercado</div>
@@ -396,7 +388,10 @@ if plano_sel:
 </div>
 </details>
 """
-        st.markdown(html_panorama, unsafe_allow_html=True)
+            st.markdown(html_panorama, unsafe_allow_html=True)
+            
+    except IndexError:
+        st.warning("Atualização de dados detectada. Por favor, re-selecione a operadora no menu acima.")
 
 # === RODAPÉ CORPORATIVO COM A MARCA ===
 st.markdown(f"""
