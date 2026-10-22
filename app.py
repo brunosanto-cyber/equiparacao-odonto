@@ -139,7 +139,7 @@ dados_mercado = {
     "INPAO Dental": {"posicao": "10ª", "vidas": "~450 mil", "perfil": "Atuação focada em segmentos premium corporativos, com alto padrão de atendimento e programas focados em saúde bucal preventiva."}
 }
 
-# === BANCO DE DADOS MASTER DE PLANOS (TODAS AS OPERADORAS INTEGRADAS) ===
+# === BANCO DE DADOS MASTER DE PLANOS ===
 dados_planos = [
     # --- UNIMED ODONTO ---
     {"Operadora": "Unimed ODONTO", "Plano": "Essencial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial"},
@@ -223,13 +223,36 @@ dados_planos = [
     {"Operadora": "MetLife", "Plano": "MetLife Dental Platinum Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "NÃO", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
     {"Operadora": "MetLife", "Plano": "MetLife Dental Diamond Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "SIM", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Plus"},
 
+    # --- SULAMÉRICA (NOVO MAPEAMENTO) ---
+    # Individual
+    {"Operadora": "SulAmérica", "Plano": "SulAmérica Odonto Mais", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
+    {"Operadora": "SulAmérica", "Plano": "SulAmérica Odonto Mais Doc", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
+    {"Operadora": "SulAmérica", "Plano": "SulAmérica Odonto Mais Clarear", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
+    {"Operadora": "SulAmérica", "Plano": "SulAmérica Odonto Mais Orto", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
+
+    # PME
+    {"Operadora": "SulAmérica", "Plano": "SulAmérica Odonto Mais PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
+    {"Operadora": "SulAmérica", "Plano": "SulAmérica Odonto Mais Doc PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
+    {"Operadora": "SulAmérica", "Plano": "SulAmérica Odonto Mais Clarear PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
+    {"Operadora": "SulAmérica", "Plano": "SulAmérica Odonto Mais Orto PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
+    {"Operadora": "SulAmérica", "Plano": "SulAmérica Odonto Mais Pro PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "SIM", "Orto_Comp": "NÃO", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Plus"},
+    {"Operadora": "SulAmérica", "Plano": "SulAmérica Odonto Mais Amplo PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
+    {"Operadora": "SulAmérica", "Plano": "SulAmérica Odonto Prestige PME", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "SIM", "Clar_Las": "SIM", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
+
+    # Empresarial
+    {"Operadora": "SulAmérica", "Plano": "SulAmérica Odonto Mais Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
+    {"Operadora": "SulAmérica", "Plano": "SulAmérica Odonto Mais Doc Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
+    {"Operadora": "SulAmérica", "Plano": "SulAmérica Odonto Mais Clarear Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
+    {"Operadora": "SulAmérica", "Plano": "SulAmérica Odonto Mais Orto Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
+    {"Operadora": "SulAmérica", "Plano": "SulAmérica Odonto Mais Pro Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "SIM", "Orto_Comp": "NÃO", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Plus"},
+    {"Operadora": "SulAmérica", "Plano": "SulAmérica Odonto Mais Amplo Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
+    {"Operadora": "SulAmérica", "Plano": "SulAmérica Odonto Prestige Empresarial", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "SIM", "Clar_Las": "SIM", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
+
     # --- OUTRAS OPERADORAS ---
     {"Operadora": "OdontoPrev", "Plano": "Bem-Estar Orto", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno"},
     {"Operadora": "OdontoPrev", "Plano": "Master", "Contratacao": "PME e MEI", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "SIM", "Equiv": "Pleno Ortodontia"},
     {"Operadora": "OdontoPrev", "Plano": "Integral Doc", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
     {"Operadora": "OdontoPrev", "Plano": "Premium", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
-    {"Operadora": "SulAmérica", "Plano": "Mais", "Contratacao": "Individual", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus"},
-    {"Operadora": "SulAmérica", "Plano": "Premium", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "SIM", "Clar_Cas": "SIM", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Top"},
     {"Operadora": "Dental Uni", "Plano": "Dental Amplo DOC", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "SIM", "Comp_Prot": "NÃO", "Orto_Comp": "NÃO", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Essencial Plus DOC"},
     {"Operadora": "INPAO Dental", "Plano": "Especial Orto", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
     {"Operadora": "Odonto Empresas", "Plano": "Alfa Orto", "Contratacao": "Empresarial", "Rol_ANS": "SIM", "Rol_Amp": "SIM", "Doc_Orto": "NÃO", "Comp_Prot": "SIM", "Orto_Comp": "SIM", "Prot_Comp": "NÃO", "Clar_Cas": "NÃO", "Clar_Las": "NÃO", "Alinhador": "NÃO", "Implantes": "NÃO", "Equiv": "Pleno Ortodontia"},
@@ -331,7 +354,7 @@ if plano_sel:
 """
             st.markdown(html_card_uni, unsafe_allow_html=True)
 
-        # === SEÇÃO INFERIOR: BOTÕES INTERATIVOS E CORRIGIDOS SEM RECUO ===
+        # === SEÇÃO INFERIOR: BOTÕES INTERATIVOS ===
         col_bottom1, col_bottom2 = st.columns(2)
         
         with col_bottom1:
@@ -390,8 +413,8 @@ if plano_sel:
 """
             st.markdown(html_panorama, unsafe_allow_html=True)
             
-    except IndexError:
-        st.warning("Atualização de dados detectada. Por favor, re-selecione a operadora no menu acima.")
+    except Exception as e:
+        st.warning("Atualização de dados detectada. Por favor, re-selecione a operadora e o plano no menu acima para limpar o cache.")
 
 # === RODAPÉ CORPORATIVO COM A MARCA ===
 st.markdown(f"""
